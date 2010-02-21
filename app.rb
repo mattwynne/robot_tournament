@@ -34,7 +34,7 @@ class PlayerUpload
   
   def manifest
     @manifest ||= with_zip do |zip|
-      @player_name = zip.dir.entries('.').first || raise("Player has no name in #{zip.dir.entries('.').inspect}")
+      @player_name = zip.dir.entries('.').first
       manifest_file = zip.find_entry("#{@player_name}/manifest")
       manifest_file.get_input_stream do |io|
         YAML.load(io.read)
