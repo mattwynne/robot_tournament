@@ -4,7 +4,7 @@ Feature: Upload player
   I want to be able to upload a player
 
   Scenario: Upload a valid but very simple player
-    Given a file named "killer/manifest" with:
+    Given a file named "bash_robot/manifest" with:
       """
       test_cmd: echo "ready"
       
@@ -14,12 +14,12 @@ Feature: Upload player
     And I should see "ready" in the response
     
   Scenario: Upload a valid and more complex player
-    Given a file named "ruby_killer/manifest" with:
+    Given a file named "ruby_robot/manifest" with:
       """
       test_cmd: ruby ./test.rb
     
       """
-    And a file named "ruby_killer/test.rb" with:
+    And a file named "ruby_robot/test.rb" with:
       """
       puts "ready"
       """
