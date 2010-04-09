@@ -2,7 +2,7 @@ require 'player'
 
 class PlayerStore
   def initialize(dir = nil)
-    @dir = dir || 'tmp/players'
+    @dir = File.expand_path(dir || default_dir)
     FileUtils.mkdir_p(@dir)
   end
   
@@ -21,5 +21,11 @@ class PlayerStore
   def clear
     FileUtils.rm_rf(@dir)
     FileUtils.mkdir_p(@dir)
+  end
+  
+  private
+  
+  def default_dir
+    File.dirname(__FILE__) + '/../tmp/players'
   end
 end

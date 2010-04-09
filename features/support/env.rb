@@ -1,6 +1,8 @@
-require File.dirname(__FILE__) + '/../../app'
-require 'rack/test'
+ENV['RACK_ENV'] ||= 'cucumber'
 
+require File.dirname(__FILE__) + '/../../lib/app'
+require 'rack/test'
+   
 module SinatraWorld
   def app
     Sinatra::Application

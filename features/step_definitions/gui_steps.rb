@@ -1,10 +1,10 @@
-Given /^there is a player "([^\"]*)"$/ do |player_name|
-  Given %{a file named "#{player_name}/move" with:}, %{
-    """
-    #!/usr/bin/env bash
-    echo "ready"
-    
-    """
-  }
-  When "I zip up the folder and upload the data to '/players'"
+When "I go to the homepage" do
+  get "/"
+end
+
+
+Then /^I should see the following players listed:$/ do |table|
+  table.raw.each do |row|
+    last_response.body.should =~ /#{row.to_s}/
+  end
 end
