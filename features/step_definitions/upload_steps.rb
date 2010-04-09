@@ -1,5 +1,3 @@
-require 'aruba'
-
 When /^I zip up the folder and upload the data to '\/players'$/ do
   in_current_dir do
     Dir['.'].length.should == 1
