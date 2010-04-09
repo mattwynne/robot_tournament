@@ -1,0 +1,5 @@
+* Remove manifest and make it work with a simple ./robot file
+* Make the actual tournament engine, because that's fucking core
+* Make a manual upload button
+* Make some example robots in different languages
+* think about how to tweak the rules
