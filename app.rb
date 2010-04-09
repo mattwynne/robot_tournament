@@ -16,7 +16,8 @@ class Player
       FileUtils.rm_rf(@name)
       @upload.unpack
       Dir.chdir(@name) do
-        `#{@upload.manifest['test_cmd']}`
+        `chmod +x move`
+        `./move`
       end
     end
   end
@@ -28,20 +29,9 @@ class PlayerUpload
   end
   
   def player_name
-    manifest unless @manifest
-    @player_name
+    @player_name ||= with_zip { |zip| zip.dir.entries('.').first }
   end
-  
-  def manifest
-    @manifest ||= with_zip do |zip|
-      @player_name = zip.dir.entries('.').first
-      manifest_file = zip.find_entry("#{@player_name}/manifest")
-      manifest_file.get_input_stream do |io|
-        YAML.load(io.read)
-      end
-    end
-  end
-  
+
   def unpack
     `unzip #{temp_file.path}`
   end
