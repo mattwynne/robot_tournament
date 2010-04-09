@@ -9,3 +9,7 @@ end
 
 World(SinatraWorld)
 World(Rack::Test::Methods)
+
+Before do
+  PlayerStore.new.clear
+end

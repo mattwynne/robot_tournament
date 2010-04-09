@@ -1,0 +1,1 @@
+$:.push File.dirname(__FILE__)

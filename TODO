@@ -1,3 +1,4 @@
+* Make tests create their own (temp) players folder and clean it up after each test
 * List players
   * Showing whether they're or not?
 * Refactor sinatra code to absorb more functionality
@@ -5,4 +6,3 @@
 * Make a manual upload button
 * Make some example robots in different languages
 * think about how to tweak the rules
-* Make tests create their own (temp) players folder and clean it up after each test
