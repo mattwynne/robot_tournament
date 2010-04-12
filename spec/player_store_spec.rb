@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require File.dirname(__FILE__) + '/../lib/player_store'
 
 describe PlayerStore do
   subject do
@@ -17,14 +17,21 @@ describe PlayerStore do
         FileUtils.mkdir('test-player-name')
       end
     end
-    it "should unpack the upload" do
+    it "unpacks the upload" do
       subject.store(@upload)
       subject.players.length.should == 1
     end
     
-    it "should keep the player's name" do
+    it "keeps the player's name" do
       subject.store(@upload)
       subject.players.first.name.should == 'test-player-name'
+    end
+    
+    it "replaces an existing player" do
+      FileUtils.mkdir('spec/tmp/players/test-player-name/')
+      FileUtils.touch('spec/tmp/players/test-player-name/foo')
+      subject.store(@upload)
+      File.exist?('spec/tmp/players/test-player-name/foo').should be_false
     end
   end
   

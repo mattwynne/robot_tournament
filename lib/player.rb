@@ -8,8 +8,4 @@ class Player
   def name
     File.basename(@path)
   end
-  
-  def test
-    "ready"
-  end
 end
