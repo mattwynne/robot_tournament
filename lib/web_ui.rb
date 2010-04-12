@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'player_upload'
+require 'home_page'
 
 error do
   "ERROR: #{env['sinatra.error']}\n#{env['sinatra.error'].backtrace.join("\n")}"
@@ -14,5 +15,6 @@ post '/players' do
 end
 
 get '/' do
-  PlayerStore.new.players.map{ |p| p.name }.to_s
+  players = PlayerStore.new.players
+  HomePage.new(players).render
 end

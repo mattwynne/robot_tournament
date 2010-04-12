@@ -11,21 +11,31 @@ describe PlayerStore do
   end
   
   describe "#store" do
-    it "should add a player" do
-      subject.store(mock(:name => 'foo'))
+    before(:each) do
+      @upload = mock
+      @upload.should_receive(:unpack) do
+        FileUtils.mkdir('test-player-name')
+      end
+    end
+    it "should unpack the upload" do
+      subject.store(@upload)
       subject.players.length.should == 1
     end
     
     it "should keep the player's name" do
-      subject.store(mock(:name => 'foo'))
-      subject.players.first.name.should == 'foo'
+      subject.store(@upload)
+      subject.players.first.name.should == 'test-player-name'
     end
   end
   
   describe "#clear" do
     context "when players exist" do
       before(:each) do
-        subject.store(mock(:name => 'foo'))
+        upload = mock
+        upload.should_receive(:unpack) do
+          FileUtils.mkdir('test-player-name')
+        end
+        subject.store(upload)
         subject.players.length.should == 1
       end
 

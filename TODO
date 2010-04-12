@@ -1,8 +1,6 @@
-* Make tests create their own (temp) players folder and clean it up after each test
-* List players
-  * Showing whether they're or not?
-* Refactor sinatra code to absorb more functionality
 * Make the actual tournament engine, because that's fucking core
 * Make a manual upload button
 * Make some example robots in different languages
 * think about how to tweak the rules
+* validate players on upload
+  (e.g. no name, no play command etc`)

@@ -6,9 +6,9 @@ class PlayerStore
     FileUtils.mkdir_p(@dir)
   end
   
-  def store(player)
+  def store(upload)
     Dir.chdir(@dir) do
-      FileUtils.mkdir(player.name)
+      upload.unpack
     end
   end
   

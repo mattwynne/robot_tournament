@@ -3,7 +3,7 @@ Feature: Upload player
   As a competitor
   I want to be able to upload a player
 
-  Scenario: Upload a valid but very simple player
+  Scenario: Upload a bash player
     Given a file named "bash_robot/move" with:
       """
       #!/usr/bin/env bash
@@ -12,9 +12,9 @@ Feature: Upload player
       """
     When I zip up the folder and upload the data to '/players'
     Then the response should be 200 OK
-    And I should see "ready" in the response
+    And I should see "Received new player bash_robot" in the response
     
-  Scenario: Upload a valid and more complex player
+  Scenario: Upload a Ruby
     Given a file named "ruby_robot/move" with:
       """
       #!/usr/bin/env ruby
@@ -23,7 +23,7 @@ Feature: Upload player
       """
     When I zip up the folder and upload the data to '/players'
     Then the response should be 200 OK
-    And I should see "ready" in the response
+    And I should see "ruby_robot" in the response
 
   Scenario: Upload a Haskell player
     Given a file named "haskell_robot/move" with:
@@ -39,4 +39,4 @@ Feature: Upload player
       """
     When I zip up the folder and upload the data to '/players'
     Then the response should be 200 OK
-    And I should see "ready" in the response
+    And I should see "haskell_robot" in the response
