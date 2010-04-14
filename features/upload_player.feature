@@ -4,7 +4,7 @@ Feature: Upload player
   I want to be able to upload a player
 
   Scenario: Upload a bash player
-    Given a file named "bash_robot/move" with:
+    Given a file named "bash_robot/play" with:
       """
       #!/usr/bin/env bash
       echo "ready"
@@ -12,7 +12,7 @@ Feature: Upload player
       """
     When I zip up the folder and upload the data to '/players'
     Then the response should be 200 OK
-    And I should see "Received new player bash_robot" in the response
+    And I should see "Received new player 'bash_robot' OK" in the response
     
   Scenario: Upload a Ruby
     Given a file named "ruby_robot/play" with:
