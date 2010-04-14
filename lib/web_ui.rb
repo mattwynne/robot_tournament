@@ -8,10 +8,8 @@ error do
 end
   
 post '/players' do
-  raw = request.env["rack.input"].read
-  upload = PlayerUpload.new(raw)
-  upload.process!
-  upload.response
+  handler = PlayerUploadHandler.new(request.env["rack.input"].read)
+  handler.process
 end
 
 get '/' do
