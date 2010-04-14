@@ -11,7 +11,7 @@ class PlayerUploadHandler
       raise(ValidationError, @upload.validation_error_message)
     end
     
-    PlayerStore.new.store(@upload)
-    return "Received new player OK"
+    player = PlayerStore.new.store(@upload)
+    return "Received new player '#{player.name}' OK\n"
   end
 end

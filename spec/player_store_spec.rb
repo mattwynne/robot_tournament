@@ -11,18 +11,19 @@ describe PlayerStore do
   end
   
   describe "#players" do
+    let(:foo) { mock(:player_name => 'foo') }
+    let(:bar) { mock(:player_name => 'bar') }
+    
     it "returns a player object for each folder in the store" do
-      @foo = mock('PlayerUpload')
-      @foo.stub(:unpack) do
+      foo.stub(:unpack) do
         FileUtils.mkdir 'foo'
       end
       
-      @bar = mock('PlayerUpload')
-      @bar.stub(:unpack) do
+      bar.stub(:unpack) do
         FileUtils.mkdir 'bar'
       end
       
-      [@foo, @bar].each { |u| subject.store(u) }
+      [foo, bar].each { |u| subject.store(u) }
 
       subject.players.length.should == 2
       subject.players.find { |p| p.name == "foo" }.should be_a(Player)
@@ -31,23 +32,33 @@ describe PlayerStore do
   end
   
   describe "#store" do
+    let(:upload) { mock(:player_name => 'foo') }
+    
     before(:each) do
-      @upload = mock
-      @upload.should_receive(:unpack)
+      upload.should_receive(:unpack) do
+        FileUtils.mkdir_p('foo')
+      end
     end
     
     it "unpacks the upload" do
-      subject.store(@upload)
+      subject.store(upload)
+    end
+    
+    it "returns an instance of Player that represents the newly stored upload" do
+      result = subject.store(upload)
+      result.name.should == 'foo'
     end
   end
   
   describe "#clear" do
     context "when players exist" do
+      let(:upload) { mock(:player_name => 'foo') }
+
       before(:each) do
-        upload = mock
         upload.should_receive(:unpack) do
-          FileUtils.mkdir('test-player-name')
+          FileUtils.mkdir('foo')
         end
+        
         subject.store(upload)
         subject.players.length.should == 1
       end

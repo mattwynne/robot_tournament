@@ -21,7 +21,7 @@ class PlayerUpload
         return "The zip file is empty" 
       end
       unless root_entries.length == 1 and zip.file.directory?(root_entries.first)
-        return "The zip file must contain a single directory in the root"
+        return "The zip file must contain a single directory in the root. Yours contains the following: '#{root_entries.join(',')}'"
       end
       
       player_name = root_entries.first
@@ -40,11 +40,11 @@ class PlayerUpload
     `unzip #{zip_file.path}`
   end
   
-  private
-  
   def player_name
     @player_name ||= with_zip { |zip| zip.dir.entries('.').first }
   end
+
+  private
 
   def with_zip
     Zip::ZipFile.open(zip_file.path) do |zip|

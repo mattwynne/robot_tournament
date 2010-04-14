@@ -6,6 +6,7 @@ When /^I zip up the folder and upload the data to '\/players'$/ do
     File.open("#{the_folder}.zip") do |io|
       post "/players", {}, {'rack.input' => io}
     end
+    FileUtils.rm_rf("#{the_folder}.zip")
   end
 end
 

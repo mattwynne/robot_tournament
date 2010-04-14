@@ -1,12 +1,11 @@
 require 'rubygems'
 require 'sinatra'
 require 'player_upload'
-require 'home_page'
+require 'web_ui/player_upload_handler'
+require 'web_ui/home_page'
 
-error do
-  "ERROR: #{env['sinatra.error']}\n#{env['sinatra.error'].backtrace.join("\n")}"
-end
-  
+set :raise_errors, true
+
 post '/players' do
   handler = PlayerUploadHandler.new(request.env["rack.input"].read)
   handler.process

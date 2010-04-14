@@ -1,10 +1,11 @@
-require File.dirname(__FILE__) + '/../lib/player_upload_handler'
+require File.dirname(__FILE__) + '/../../lib/web_ui/player_upload_handler'
 
 describe PlayerUploadHandler do
   
   let(:player_upload) { mock('player_upload', :valid? => true) }
   let(:raw_data)      { mock('raw_data') }
-  let(:player_store)  { mock('player_store', :store => true) }
+  let(:player)        { mock('player', :name => 'foo' )}
+  let(:player_store)  { mock('player_store', :store => player) }
   
   subject { PlayerUploadHandler.new(raw_data) }
   
@@ -26,6 +27,7 @@ describe PlayerUploadHandler do
 
       it "returns a success message" do
         subject.process.should =~ /OK/
+        subject.process.should =~ /foo/
       end
       
       it "stores the player" do

@@ -10,6 +10,7 @@ class PlayerStore
     Dir.chdir(@dir) do
       upload.unpack
     end
+    players.find{ |p| p.name == upload.player_name }
   end
   
   def players
