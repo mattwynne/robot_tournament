@@ -27,8 +27,8 @@ class PlayerUpload
       player_name = root_entries.first
       player_entries = zip.dir.entries(player_name)
       
-      unless player_entries.include?('play')
-        return "The '#{player_name}' folder must contain a 'play' command file"
+      unless player_entries.include?('move')
+        return "The '#{player_name}' folder must contain a 'move' command file"
       end
     end
     nil
