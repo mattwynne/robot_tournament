@@ -1,6 +1,6 @@
 class Tournament
   def initialize(name, rounds, &play)
-    @name = name,
+    @name = name
     @play = play
   end
   
