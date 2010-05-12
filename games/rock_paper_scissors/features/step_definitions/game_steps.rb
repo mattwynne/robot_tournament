@@ -1,4 +1,3 @@
-# TODO: move this somewhere so other games can share it
 Given /^a player "([^\"]*)" who moves like this:$/ do |name, move_file_content|
   create_dir(name)
   create_file("#{name}/move", move_file_content)
@@ -7,7 +6,7 @@ Given /^a player "([^\"]*)" who moves like this:$/ do |name, move_file_content|
 end
 
 When /^a game is played between "([^\"]*)" and "([^\"]*)"$/ do |player_1, player_2|
-  game_path = File.expand_path(File.dirname(__FILE__) + "/../../bin/tic_tac_toe")
+  game_path = File.expand_path(File.dirname(__FILE__) + "/../../bin/rock_paper_scissors")
   in_current_dir do
     player_1_path = File.expand_path(player_1)
     player_2_path = File.expand_path(player_2)
