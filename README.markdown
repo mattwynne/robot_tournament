@@ -4,7 +4,7 @@ Start the server like this:
 
     ./bin/server
 
-That starts the tournament engine, where you can host battles between rival team's robots. Robots are built by programmers and have to conform to a simple protocol:
+That starts the tournament engine, where you can host battles between rival teams' robots. Robots are built by programmers and have to conform to a simple protocol:
 
   * uploaded as zip file
   * zip file contains a single folder in the root from which the robot will take it's name
