@@ -1,4 +1,4 @@
-require 'player'
+require 'robot_tournament/player'
 
 class PlayerStore
   def initialize(dir = nil)

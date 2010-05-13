@@ -3,7 +3,7 @@ class Player
   
   def initialize(path)
     @path = File.expand_path(path)
-    `chmod +x #{move_cmd}`
+    `chmod +x #{move_cmd}` if File.exists?(move_cmd)
   end
   
   def name

@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../../lib/web_ui/player_upload_handler'
+require File.dirname(__FILE__) + '/../../spec_helper'
+require 'robot_tournament/web_ui'
 
 describe PlayerUploadHandler do
   

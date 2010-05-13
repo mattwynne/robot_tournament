@@ -4,7 +4,7 @@ Feature: Play tournament
   I want tournaments dammit
   
   Scenario: Two players, one obvious winner
-    Given a tournament 'rock-paper-scissors' with 1 round
+    Given a tournament of 'rock-paper-scissors' with 1 round
     And a player 'always-rock' who always says 'rock'
     And a player 'always-paper' who always says 'paper'
     When the tournament is played

@@ -1,5 +1,5 @@
-require 'player_upload'
-require 'validation_error'
+require 'robot_tournament/player_upload'
+require 'robot_tournament/validation_error'
 
 class PlayerUploadHandler
   def initialize(raw)

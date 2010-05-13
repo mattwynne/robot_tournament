@@ -101,4 +101,10 @@ Feature: Play game
       -o-------
       Result: o wins
       
-      """  
+      """
+  
+  Scenario: Player makes an illegal move
+  
+  Scenario: Player dies and throws an exception to STDERR
+  
+  Scenario: Player dies and throws an exception to STDOUT

@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + '/../lib/player_upload'
+require File.dirname(__FILE__) + '/../spec_helper'
 require 'pathname'
 
 describe PlayerUpload do
   def working_dir
-    result = File.expand_path(File.dirname(__FILE__) + '/../spec/tmp/player_uploads')
+    result = File.expand_path(File.dirname(__FILE__) + '/../../spec/tmp/player_uploads')
     raise(result) unless result[0..0] == "/"
     result
   end
@@ -32,8 +32,8 @@ describe PlayerUpload do
   def self.zip_data(source)
     path = File.expand_path(
       File.dirname(__FILE__) + 
-      "/data/player_uploads/#{source}")
-      
+      "/../data/player_uploads/#{source}")
+    
     define_method(:zip_file_source) do
       Pathname.new(path)
     end
@@ -61,7 +61,7 @@ describe PlayerUpload do
         end
 
         Dir.entries(working_dir).should == ['.', '..', 'test_player']
-        Dir.entries(working_dir + '/test_player').should == ['.', '..', 'play']
+        Dir.entries(working_dir + '/test_player').should == ['.', '..', 'move']
       end
     
       it "replaces any existing upload" do

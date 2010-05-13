@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'sinatra'
-require 'player_upload'
-require 'web_ui/player_upload_handler'
-require 'web_ui/home_page'
+require 'robot_tournament/player_upload'
+require 'robot_tournament/web_ui/player_upload_handler'
+require 'robot_tournament/web_ui/home_page'
 
 set :raise_errors, true
 

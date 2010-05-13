@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'zip/zip'
 require 'zip/zipfilesystem'
-require 'player_store'
-require 'validation_error'
+require 'robot_tournament/player_store'
+require 'robot_tournament/validation_error'
 
 class PlayerUpload
   def initialize(raw)

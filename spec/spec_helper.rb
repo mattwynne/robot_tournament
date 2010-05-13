@@ -1,3 +1,3 @@
 require 'rubygems'
 require 'spec'
-require File.dirname(__FILE__) + '/../lib/app'
+require File.dirname(__FILE__) + '/../lib/robot_tournament'

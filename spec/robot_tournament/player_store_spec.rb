@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/player_store'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PlayerStore do
   subject do

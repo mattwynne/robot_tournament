@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/player'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Player do
   before(:each) do
