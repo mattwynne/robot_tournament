@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/robot_tournament'
+require 'trollop'
+
+opts = Trollop::options do
+  opt :name, "Tournament name", :required => true, :type => :string
+  opt :rounds, "Number of rounds", :default => 5, :type => :int
+  opt :duration, "Length of each round (in minutes)", :default => 10, :type => :int
+  opt :force, "Delete any existing tournament", :default => false
+end
+
+attributes = {
+  :name => opts[:name],
+  :rounds => opts[:rounds],
+  :duration => opts[:duration]
+}
+
+tournaments = TournamentStore.new
+tournaments.clear if opts[:force]
+tournaments.create(attributes).start!

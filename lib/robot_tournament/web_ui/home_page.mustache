@@ -5,7 +5,7 @@
     {{#tournament}}
       <h1>Tournament in Progress: "{{name}}"</h1>
       <p>Next round begins in {{duration_until_next_round}}</p>
-      <h1>Players:</h1>
+      <h1>Players registered:</h1>
       <ul>
       {{#players}}
         <li>{{name}}</li>
@@ -14,6 +14,10 @@
         <li>There are no players registered</li>
       {{/players}}
       </ul>
+      <p>To register a player, use the following command:</p>
+      <pre>
+        
+      </pre>
     {{/tournament}}
     {{^tournament}}
       <p>There is currently no tournament. Why not ask someone to kick one off?</p>

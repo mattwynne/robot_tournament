@@ -15,7 +15,8 @@ class TournamentStore
     raise "A Tournament is already in progress!" if current_tournament_exists?
     FileUtils.mkdir_p(current_tournament_path)
     File.open(current_tournament_path + '/settings.json', 'w') do |file|
-      file.puts(JSON.generate(settings))
+      json = settings.to_json
+      file.puts(json)
     end
     current
   end
