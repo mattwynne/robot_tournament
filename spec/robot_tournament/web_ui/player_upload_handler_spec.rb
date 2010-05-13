@@ -1,24 +1,35 @@
-require File.dirname(__FILE__) + '/../../spec_helper'
+require 'spec_helper'
 require 'robot_tournament/web_ui'
 
 describe PlayerUploadHandler do
   
-  let(:player_upload) { mock('player_upload', :valid? => true) }
-  let(:raw_data)      { mock('raw_data') }
-  let(:player)        { mock('player', :name => 'foo' )}
-  let(:player_store)  { mock('player_store', :store => player) }
+  let(:raw_data)         { mock('raw_data') }
+  let(:player_upload)    { mock(PlayerUpload, :valid? => true) }
+  let(:player)           { mock(Player, :name => 'foo' )}
+  let(:tournament)       { mock(Tournament, :store_player_upload => player) }
+  let(:tournament_store) { mock(TournamentStore, :current => tournament) }
   
   subject { PlayerUploadHandler.new(raw_data) }
   
   before(:each) do
     PlayerUpload.stub!(:new).and_return(player_upload)
-    PlayerStore.stub!(:new).and_return(player_store)
+    TournamentStore.stub!(:new).and_return(tournament_store)
   end
   
   describe "#process" do
     it "validates the upload" do
       player_upload.should_receive(:valid?)
       subject.process
+    end
+    
+    context "if there is no current tournament" do
+      before(:each) do
+        TournamentStore.stub(:new).and_return(mock(TournamentStore, :current => nil))
+      end
+      
+      it "raises an exception" do
+        expect { subject.process }.to raise_error(NoCurrentTournament)
+      end
     end
     
     context "if there were no validation errors" do
@@ -32,7 +43,7 @@ describe PlayerUploadHandler do
       end
       
       it "stores the player" do
-        player_store.should_receive(:store).with(player_upload)
+        tournament.should_receive(:store_player_upload).with(player_upload)
         subject.process
       end
     end

@@ -36,7 +36,7 @@ require 'chronic_duration'
 #   end
 # end
 # 
-When /^I create a new Tournament "([^\"]*)" with the following attributes:$/ do |name, table|
+When /^(?:I create )?a(?: new)? Tournament "([^\"]*)" with the following attributes:$/ do |name, table|
   attributes = table.rows_hash
   attributes["name"] = name
   TournamentStore.new.create(attributes).start!
@@ -59,6 +59,11 @@ end
 Then /^I should see that no players are registered for the Round$/ do
   page.should have_content "no players"
 end
+
+Then /^I should see that 'always\-paper' is the winner$/ do
+  page.should have_content "winner: always-paper"
+end
+
 
 # Given /^a tournament 'rock-paper-scissors' with (\d+) round$/ do |rounds|
 #   @tournament = Tournament.new('rock-paper-scissors', rounds.to_i) do |player1, player2|

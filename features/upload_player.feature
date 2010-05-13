@@ -3,6 +3,12 @@ Feature: Upload player
   In order to be able to play
   As a competitor
   I want to be able to upload a player
+  
+  Background:
+    Given a Tournament "foo" with the following attributes:
+      | rounds   | 1                   |
+      | duration | 10                  |
+      | game     | rock_paper_scissors |
 
   Scenario: Upload a bash player
     Given a file named "bash_robot/move" with:

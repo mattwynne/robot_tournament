@@ -2,12 +2,12 @@ require 'mustache'
 class HomePage < Mustache
   self.template_path = File.dirname(__FILE__)
   
-  def initialize(players)
-    @players = players
+  def initialize(env)
+    @env = env
   end
   
-  def players
-    @players
+  def upload_path
+    "#{@env["rack.url_scheme"]}://#{@env["HTTP_HOST"]}/players"
   end
   
   def tournament

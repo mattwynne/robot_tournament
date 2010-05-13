@@ -1,8 +1,8 @@
 require 'robot_tournament/player'
 
 class PlayerStore
-  def initialize(dir = nil)
-    @dir = File.expand_path(dir || default_dir)
+  def initialize(dir)
+    @dir = File.expand_path(dir)
     FileUtils.mkdir_p(@dir)
   end
   
@@ -22,11 +22,5 @@ class PlayerStore
   def clear
     FileUtils.rm_rf(@dir)
     FileUtils.mkdir_p(@dir)
-  end
-  
-  private
-  
-  def default_dir
-    RobotTournament.base_dir + '/players'
   end
 end

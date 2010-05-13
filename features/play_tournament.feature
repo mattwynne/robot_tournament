@@ -4,8 +4,12 @@ Feature: Play tournament
   I want tournaments dammit
   
   Scenario: Two players, one obvious winner
-    Given a tournament of 'rock-paper-scissors' with 1 round
+    Given a Tournament "foo" with the following attributes:
+      | rounds   | 1                   |
+      | duration | 10                  |
+      | game     | rock_paper_scissors |
     And a player 'always-rock' who always says 'rock'
     And a player 'always-paper' who always says 'paper'
-    When the tournament is played
-    Then the player 'always-paper' should be the winner
+    When 10 minutes pass
+    And I go to the homepage
+    Then I should see that 'always-paper' is the winner

@@ -8,7 +8,7 @@ Feature: Start tournament
       | rounds   | 3                   |
       | duration | 10                  |
       | game     | rock_paper_scissors |
-    When I go to the homepage
+    And I go to the homepage
     Then I should see that the Tournament "foo" is in progress
     And I should see that the first Round will begin in less than 10 minutes
     And I should see that no players are registered for the Round

@@ -28,6 +28,10 @@ class Tournament
     ChronicDuration.output(wait, :format => :long)
   end
   
+  def store_player_upload(upload)
+    next_round.store_player_upload(upload)
+  end
+  
   private
   
   def next_round

@@ -5,7 +5,8 @@
     {{#tournament}}
       <h1>Tournament in Progress: "{{name}}"</h1>
       <p>Next round begins in {{duration_until_next_round}}</p>
-      <h1>Players registered:</h1>
+      
+      <h2>Players registered:</h2>
       <ul>
       {{#players}}
         <li>{{name}}</li>
@@ -14,10 +15,13 @@
         <li>There are no players registered</li>
       {{/players}}
       </ul>
-      <p>To register a player, use the following command:</p>
+      <p>To register a player, use a command something like this:</p>
       <pre>
-        
+        curl {{upload_path}} --data-binary @my-player.zip
       </pre>
+      
+      <h2>Finished Rounds</h2>
+      
     {{/tournament}}
     {{^tournament}}
       <p>There is currently no tournament. Why not ask someone to kick one off?</p>

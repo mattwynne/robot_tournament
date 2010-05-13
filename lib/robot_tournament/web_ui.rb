@@ -12,6 +12,5 @@ post '/players' do
 end
 
 get '/' do
-  players = PlayerStore.new.players
-  HomePage.new(players).render
+  HomePage.new(request.env).render
 end
