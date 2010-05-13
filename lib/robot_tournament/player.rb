@@ -12,6 +12,7 @@ class Player
   end
   
   def ==(other)
+    return false unless other.respond_to?(:path)
     other.path == @path
   end
   
