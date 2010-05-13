@@ -1,3 +1,4 @@
+@rack_test
 Feature: Upload player
   In order to be able to play
   As a competitor

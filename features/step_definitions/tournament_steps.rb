@@ -37,7 +37,16 @@
 # 
 When /^I create a new Tournament "([^\"]*)" with the following attributes:$/ do |name, table|
   attributes = table.rows_hash
+  attributes["name"] = name
   TournamentStore.new.create(attributes).start
+end
+
+Then /^I should see that the Tournament "([^\"]*)" is in progress$/ do |name|
+  page.should have_content(%{Tournament in Progress: "#{name}"})
+end
+
+Then /^I should see that the first Round will begin in less than 10 minutes$/ do
+  pending # express the regexp above with the code you wish you had
 end
 
 # Given /^a tournament 'rock-paper-scissors' with (\d+) round$/ do |rounds|

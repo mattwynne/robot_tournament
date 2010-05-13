@@ -1,5 +1,5 @@
 When "I go to the homepage" do
-  get "/"
+  visit "/"
 end
 
 
