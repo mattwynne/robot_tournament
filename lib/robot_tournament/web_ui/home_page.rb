@@ -9,4 +9,8 @@ class HomePage < Mustache
   def players
     @players
   end
+  
+  def tournament
+    TournamentStore.new.current
+  end
 end

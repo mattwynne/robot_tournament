@@ -13,6 +13,12 @@ end
 World(SinatraWorld)
 World(Rack::Test::Methods)
 
+RobotTournament.base_dir = RobotTournament.base_dir + '/tmp/cucumber'
+
 Before do
   PlayerStore.new.clear
+end
+
+Before do
+  TournamentStore.new.clear
 end

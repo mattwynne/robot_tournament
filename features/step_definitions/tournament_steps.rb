@@ -37,7 +37,7 @@
 # 
 When /^I create a new Tournament "([^\"]*)" with the following attributes:$/ do |name, table|
   attributes = table.rows_hash
-  Tournament.new(attributes).start
+  TournamentStore.new.create(attributes).start
 end
 
 # Given /^a tournament 'rock-paper-scissors' with (\d+) round$/ do |rounds|

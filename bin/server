@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+thin -R config.ru start

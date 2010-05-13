@@ -27,6 +27,6 @@ class PlayerStore
   private
   
   def default_dir
-    File.dirname(__FILE__) + '/../tmp/players'
+    RobotTournament.base_dir + '/players'
   end
 end

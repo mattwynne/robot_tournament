@@ -2,11 +2,17 @@
   <head>
   </head>
   <body>
-    <h1>Players:</h1>
-    <ul>
-    {{#players}}
-      <li>{{name}}</li>
-    {{/players}}
-    </ul>
+    {{#tournament}}
+      <h1>Tournament in Progress: "{{name}}"</h1>
+      <h1>Players:</h1>
+      <ul>
+      {{#players}}
+        <li>{{name}}</li>
+      {{/players}}
+      </ul>
+    {{/tournament}}
+    {{^tournament}}
+      <p>There is currently no tournament. Why not ask someone to kick one off?</p>
+    {{/tournament}}
   </body>
 </html>
