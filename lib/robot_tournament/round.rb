@@ -15,9 +15,13 @@ class Round
     player_store.store(upload)
   end
   
+  def players
+    player_store.players
+  end
+  
   private
   
   def player_store
-    @player_store ||= PlayerStore.new(@path)
+    @player_store ||= PlayerStore.new(@path + '/players')
   end
 end
