@@ -10,6 +10,9 @@
       {{#players}}
         <li>{{name}}</li>
       {{/players}}
+      {{^players}}
+        <li>There are no players registered</li>
+      {{/players}}
       </ul>
     {{/tournament}}
     {{^tournament}}

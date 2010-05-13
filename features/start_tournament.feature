@@ -11,3 +11,4 @@ Feature: Start tournament
     When I go to the homepage
     Then I should see that the Tournament "foo" is in progress
     And I should see that the first Round will begin in less than 10 minutes
+    And I should see that no players are registered for the Round

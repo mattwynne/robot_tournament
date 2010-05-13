@@ -24,7 +24,7 @@ class Tournament
   end
   
   def duration_until_next_round
-    wait = (next_round.start_time - Time.now)
+    wait = (next_round.start_time - Time.now).to_i
     ChronicDuration.output(wait, :format => :long)
   end
   

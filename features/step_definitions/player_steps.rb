@@ -4,7 +4,7 @@ Given /^a player '(.*)' who always says '(.*)'$/ do |player_name, move|
 echo "#{move}"
 MOVE
   When "I zip up the folder and upload the data to '/players'"
-  last_response.should be_ok
+  page.driver.response.should be_ok
   in_current_dir do
     FileUtils.rm_rf player_name
   end
