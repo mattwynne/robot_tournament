@@ -64,6 +64,10 @@ Then /^I should see that 'always\-paper' is the winner$/ do
   page.should have_content "winner: always-paper"
 end
 
+When /^the engine is kicked$/ do
+  tournament.kick
+end
+
 
 # Given /^a tournament 'rock-paper-scissors' with (\d+) round$/ do |rounds|
 #   @tournament = Tournament.new('rock-paper-scissors', rounds.to_i) do |player1, player2|

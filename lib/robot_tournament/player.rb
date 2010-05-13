@@ -1,22 +1,23 @@
 class Player
   attr_reader :name
+  attr_reader :path
   
   def initialize(path)
     @path = File.expand_path(path)
-    `chmod +x #{move_cmd}` if File.exists?(move_cmd)
+    `chmod +x #{cmd}` if File.exists?(cmd)
   end
   
   def name
     File.basename(@path)
   end
   
-  def move
-    `#{move_cmd}`
+  def ==(other)
+    other.path == @path
   end
   
-  private 
+  private
   
-  def move_cmd
+  def cmd
     "#{@path}/move"
   end
 end
