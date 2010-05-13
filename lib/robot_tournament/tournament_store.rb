@@ -14,7 +14,7 @@ class TournamentStore
   def create(settings)
     raise "A Tournament is already in progress!" if current_tournament_exists?
     FileUtils.mkdir_p(current_tournament_path)
-    File.open(current_tournament_path + 'settings.json', 'w') do |file|
+    File.open(current_tournament_path + '/settings.json', 'w') do |file|
       file.puts(JSON.generate(settings))
     end
     current
@@ -28,11 +28,10 @@ class TournamentStore
   private
   
   def current_tournament_path
-    @dir + '/current/'
+    @dir + '/current'
   end
   
   def current_tournament_exists?
     File.exists?(current_tournament_path)
   end
-  
 end
