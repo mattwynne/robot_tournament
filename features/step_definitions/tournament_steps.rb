@@ -25,7 +25,7 @@ Then /^I should see that no players are registered for the Round$/ do
 end
 
 Then /^I should see that 'always\-paper' is the winner$/ do
-  page.should have_content "winner: always-paper"
+  find("//*[@id='winner']").text.should == "always-paper"
 end
 
 When /^the engine is kicked$/ do
@@ -34,4 +34,16 @@ end
 
 Then /^I should see that the tournament has finished$/ do
   page.should have_content "This tournament has finished"
+end
+
+Then /^I should see that 2 rounds were played$/ do
+  page.all("//*[@class='finished round']").length.should == 2
+end
+
+Then /^I should see that 2 matches were played in each round$/ do
+  finished_rounds = page.all("//*[@class='finished round']")
+  finished_rounds.length.should == 2
+  finished_rounds.each do |round|
+    round.all("//*[@class='match']").length.should == 2
+  end
 end

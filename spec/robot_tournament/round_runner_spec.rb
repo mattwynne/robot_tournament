@@ -33,8 +33,8 @@ describe RoundRunner do
         
         it "posts a league table to the observer" do
           expected_table = [
-            [ "player1", 4 ],
-            [ "player2", 1 ]
+            { "player" => "player1", "points" => 4 },
+            { "player" => "player2", "points" => 1 }
           ]
           observer.should_receive(:league_table!).with(expected_table)
           subject.start!
@@ -42,8 +42,18 @@ describe RoundRunner do
         
         it "posts the individual results to the observer" do
           expected_results = [
-            [ "player1", "player2", "player1", "output as player1 wins" ],
-            [ "player2", "player1", nil, "output as draw happens" ]
+            { 
+              "player1" => "player1", 
+              "player2" => "player2", 
+              "winner"  => "player1", 
+              "output"  => "output as player1 wins" 
+            },
+            { 
+              "player1" => "player2", 
+              "player2" => "player1", 
+              "winner"  => nil, 
+              "output"  => "output as draw happens" 
+            }
           ]
           observer.should_receive(:results!).with(expected_results)
           subject.start!

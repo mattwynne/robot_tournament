@@ -12,8 +12,10 @@ Feature: Finish tournament
     And a player 'always-paper' who always says 'paper'
     When 10 minutes pass
     And the engine is kicked
-    And 10 minutes pass
+    And 11 minutes pass
     And the engine is kicked
     And I go to the homepage
     Then I should see that the tournament has finished
     Then I should see that 'always-paper' is the winner
+    And I should see that 2 rounds were played
+    And I should see that 2 matches were played in each round

@@ -10,6 +10,12 @@ class Round
     read_settings!
   end
   
+  def name
+    raw_name = File.basename(@path)
+    num = /^round_(\d+)$/.match(raw_name)
+    "Round #{num[1]}"
+  end
+  
   def kick
     start! if due?
   end
@@ -28,6 +34,10 @@ class Round
   
   def players
     player_store.players
+  end
+  
+  def results
+    read_json(:results)
   end
   
   def results!(results)

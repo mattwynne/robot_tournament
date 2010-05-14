@@ -1,31 +1,75 @@
 <html>
   <head>
+    <style type="text/css">
+      body {
+        font-family: Helvetica;
+      }
+      pre {
+        background-color: black;
+        color: white;
+        font-size: 12pt;
+      }
+      
+      .match {
+        margin-left: 10px;
+        border: 4px dashed #aaa;
+        padding: 4px;
+        margin-top: 4px;
+      }
+      
+      .match h4 {
+        padding: 2px;
+      }
+      
+      .winner {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     {{#tournament}}
       <h1>Tournament: "{{name}}"</h1>
       {{#finished?}}
         <p>This tournament has finished.</p>
-        <h2>Winner: {{winner}}</h2>
+        <h2>And the winner is... <span id="winner">{{winner}}</span></h2>
       {{/finished?}}
-      {{^finished}}
-      <p>Next round begins in {{duration_until_next_round}}</p>
-      <p>Current winner: {{winner}}</p>
+      {{^finished?}}
+        <p>Next round begins in {{duration_until_next_round}}</p>
+        {{#winner}}
+        <p>Current leader: {{winner}}</p>
+        {{/winner}}
       
-      <h2>Players registered:</h2>
-      <ul>
-      {{#players}}
-        <li>{{name}}</li>
-      {{/players}}
-      {{^players}}
-        <li>There are no players registered</li>
-      {{/players}}
-      </ul>
-      <p>To register a player, use a command something like this:</p>
-      <pre>
-        curl {{upload_path}} --data-binary @my-player.zip
-      </pre>
-      {{/finished}}
+        <h2>Players registered:</h2>
+        <ul>
+        {{#players}}
+          <li>{{name}}</li>
+        {{/players}}
+        {{^players}}
+          <li>There are no players registered</li>
+        {{/players}}
+        </ul>
+        <p>To register a player, use a command something like this:</p>
+        <pre>
+          curl {{upload_path}} --data-binary @my-player.zip
+        </pre>
+      {{/finished?}}
+      {{#finished_rounds}}
+        <h2 class="finished round">{{name}}</h2>
+        <h3>Results</h3>
+        {{#results}}
+          <div class="match" />
+            <h4>{{player1}} vs {{player2}}</h4>
+            <pre>
+{{output}}
+            </pre>
+            <p>Result: 
+            {{#winner}}<span class="winner">{{winner}} wins{{/winner}}
+            {{^winner}}Draw{{/winner}}
+            </p>
+          </div>
+        {{/results}}
+      {{/finished_rounds}}
     {{/tournament}}
     {{^tournament}}
       <p>There is currently no tournament. Why not ask someone to kick one off?</p>

@@ -53,11 +53,15 @@ class Tournament
     tables = rounds.select { |round| round.finished? }.map { |round| round.league_table }
     points = Hash.new(0)
     tables.each do |table|
-      table.each do |player, points_in_round|
-        points[player] += points_in_round
+      table.each do |row|
+        points[row["player"]] += row["points"]
       end
     end
     points.to_a.sort{ |a,b| a[1] <=> b[1] }
+  end
+  
+  def finished_rounds
+    rounds.select { |round| round.finished? }
   end
   
   def finished?
