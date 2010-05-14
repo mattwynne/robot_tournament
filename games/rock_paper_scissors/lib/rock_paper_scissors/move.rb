@@ -12,6 +12,7 @@ class Move
   def <=>(other)
     raise(NeedToExecute) unless @value
     return 0 if other.value == self.value
+    return -1 unless valid?
     case @value
     when "fail"
       return -1

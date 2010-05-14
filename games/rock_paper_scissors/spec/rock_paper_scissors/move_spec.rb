@@ -43,5 +43,9 @@ describe Move do
       reporter.should_receive(:invalid).with(player.name)
       move("silly")
     end
+    
+    it "loses to a valid move" do
+      move("silly").should be < move("rock")
+    end
   end
 end
