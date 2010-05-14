@@ -1,7 +1,7 @@
-Feature: Start tournament
+Feature: Create tournament
   In order to get things underway
   As an admin
-  I want be able to start a tournament
+  I want be able to create a tournament
   
   Scenario: Tournament with 3 rounds
     When I create a new Tournament "foo" with the following attributes:

@@ -3,7 +3,12 @@
   </head>
   <body>
     {{#tournament}}
-      <h1>Tournament in Progress: "{{name}}"</h1>
+      <h1>Tournament: "{{name}}"</h1>
+      {{#finished?}}
+        <p>This tournament has finished.</p>
+        <h2>Winner: {{winner}}</h2>
+      {{/finished?}}
+      {{^finished}}
       <p>Next round begins in {{duration_until_next_round}}</p>
       <p>Current winner: {{winner}}</p>
       
@@ -20,9 +25,7 @@
       <pre>
         curl {{upload_path}} --data-binary @my-player.zip
       </pre>
-      
-      <h2>Finished Rounds</h2>
-      
+      {{/finished}}
     {{/tournament}}
     {{^tournament}}
       <p>There is currently no tournament. Why not ask someone to kick one off?</p>

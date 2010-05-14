@@ -60,6 +60,10 @@ class Tournament
     points.to_a.sort{ |a,b| a[1] <=> b[1] }
   end
   
+  def finished?
+    rounds.all? { |round| round.finished? }
+  end
+  
   private
   
   def next_round
