@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../lib/robot_tournament'
+require 'rubygems'
+require 'trollop'
+
+opts = Trollop::options do
+  opt :repeat, "Keep kicking every second until you make me stop", :default => false
+end
+
 Tournament.kick
+while opts[:repeat]
+  sleep 1
+  Tournament.kick
+  print "."
+end
