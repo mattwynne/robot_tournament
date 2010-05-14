@@ -40,7 +40,7 @@ describe Move do
   
   context "an invalid move" do
     it "tells the reporter" do
-      reporter.should_receive(:invalid).with(subject.name)
+      reporter.should_receive(:invalid).with(player.name)
       move("silly")
     end
   end
