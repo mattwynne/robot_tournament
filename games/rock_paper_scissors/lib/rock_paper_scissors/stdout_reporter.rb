@@ -3,8 +3,7 @@ class StdoutReporter
   end
   
   def fail(name, message)
-    move(name, message)
-    puts "Player '#{name}' has returned a non-zero exit status and has forfeited the game."
+    puts "Player '#{name}' has #{message} and has forfeited the game."
   end
   
   def draw

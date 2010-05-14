@@ -1,7 +1,8 @@
 require 'move'
 class Game
-  def initialize(players)
+  def initialize(players, opts)
     @players = players
+    Player.max_move_secs = opts[:timeout] if opts[:timeout]
   end
   
   def play(reporter)

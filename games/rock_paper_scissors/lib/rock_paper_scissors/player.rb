@@ -1,4 +1,5 @@
 require 'tempfile'
+require 'timeout'
 
 class FailedToMoveError < StandardError
   def initialize(name, message)
@@ -7,6 +8,10 @@ class FailedToMoveError < StandardError
 end
 
 class Player
+  class << self
+    attr_accessor :max_move_secs
+  end
+  
   def initialize(path)
     @path = path
   end
@@ -20,13 +25,17 @@ class Player
     stderr_file.close
     
     cmd = "#{@path}/move"
-    stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    stdout = Timeout.timeout(Player.max_move_secs) do
+      IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    end
     stderr = IO.read(stderr_file.path)
     if $?.exitstatus == 0
       observer.result(stdout.strip)
     else
       observer.fail(stderr)
     end
+  rescue Timeout::Error
+    observer.timeout
   end
   
   def to_s
@@ -37,3 +46,5 @@ class Player
     File.basename(@path)
   end
 end
+
+Player.max_move_secs = 1

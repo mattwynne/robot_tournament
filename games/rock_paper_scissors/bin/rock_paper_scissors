@@ -3,19 +3,19 @@ require File.dirname(__FILE__) + '/../lib/rock_paper_scissors'
 
 require 'stdout_reporter'
 require 'players'
+require 'rubygems'
+require 'trollop'
 
-module Cli
-  def self.die(message)
-    STDERR.puts(message)
-    exit 1
-  end
+opts = Trollop::options do
+  opt :timeout, "Number of seconds to wait for a player", :type => :float
 end
 
 unless ARGV.length == 2
-  Cli.die("Syntax: rock_paper_scissors path/to/player1 path/to/player2")
+  Trollop::die("Syntax: rock_paper_scissors path/to/player1 path/to/player2 [options]")
 end
 
+paths = ARGV.shift(2)
 reporter = StdoutReporter.new
-players = Players.new(ARGV[0..1], reporter)
-game = Game.new(players)
+players = Players.new(paths, reporter)
+game = Game.new(players, opts)
 game.play(reporter)

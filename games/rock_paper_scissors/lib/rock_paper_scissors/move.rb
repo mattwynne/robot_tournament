@@ -42,9 +42,15 @@ class Move
   end
   
   def fail(message)
-    @fail_message = message
     @value = "fail"
-    @reporter.fail(@player.name, message)
+    @reporter.move(@player.name, message)
+    @reporter.fail(@player.name, "returned a non-zero exit status")
+    self
+  end
+  
+  def timeout
+    @value = "fail"
+    @reporter.fail(@player.name, "taken more than #{Player.max_move_secs} second(s) to move")
     self
   end
   

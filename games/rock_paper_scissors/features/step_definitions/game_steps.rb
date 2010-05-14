@@ -10,6 +10,11 @@ When /^a game is played between "([^\"]*)" and "([^\"]*)"$/ do |player_1, player
   in_current_dir do
     player_1_path = File.expand_path(player_1)
     player_2_path = File.expand_path(player_2)
-    run("#{game_path} #{player_1_path} #{player_2_path}")
+    cmd = "#{game_path} #{player_1_path} #{player_2_path} #{@opts}"
+    run(cmd)
   end
+end
+
+Given /^the maximum seconds allowed for a move is (.*)$/ do |value|
+  @opts = "--timeout #{value}"
 end

@@ -31,7 +31,7 @@ Feature: Play game
       """
       
   Scenario: Forfeit for invalid move
-    And a player "idiot" who moves like this:
+    Given a player "idiot" who moves like this:
       """
       #!/usr/bin/env ruby
       puts "hello"
@@ -47,7 +47,7 @@ Feature: Play game
       """
 
   Scenario: Forfeit for no response
-    And a player "mute" who moves like this:
+    Given a player "mute" who moves like this:
       """
       #!/usr/bin/env ruby
       """
@@ -55,29 +55,30 @@ Feature: Play game
     Then I should see exactly:
       """
       always-rock: rock
-      mute:
+      mute: 
       Player 'mute' has made an invalid move and has forfeited the game.
       Result: always-rock wins
       
       """
 
   Scenario: Forfeit for timeout
+    Given the maximum seconds allowed for a move is 1.0
     And a player "slow" who moves like this:
       """
       #!/usr/bin/env ruby
-      wait 2
+      sleep 1
       """
     When a game is played between "always-rock" and "slow"
     Then I should see exactly:
       """
       always-rock: rock
-      Player 'slow' has taken more than 1 second to move and has forfeited the game.
+      Player 'slow' has taken more than 1.0 second(s) to move and has forfeited the game.
       Result: always-rock wins
       
       """
 
   Scenario: Forfeit for being broken
-    And a player "broken" who moves like this:
+    Given a player "broken" who moves like this:
       """
       #!/usr/bin/env ruby
       STDERR.puts "argh I am dying"
