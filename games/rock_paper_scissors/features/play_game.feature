@@ -43,6 +43,7 @@ Feature: Play game
       idiot: hello
       Player 'idiot' has made an invalid move and has forfeited the game.
       Result: always-rock wins
+      
       """
 
   Scenario: Forfeit for no response
@@ -57,6 +58,7 @@ Feature: Play game
       mute:
       Player 'mute' has made an invalid move and has forfeited the game.
       Result: always-rock wins
+      
       """
 
   Scenario: Forfeit for timeout
@@ -71,6 +73,7 @@ Feature: Play game
       always-rock: rock
       Player 'slow' has taken more than 1 second to move and has forfeited the game.
       Result: always-rock wins
+      
       """
 
   Scenario: Forfeit for being broken

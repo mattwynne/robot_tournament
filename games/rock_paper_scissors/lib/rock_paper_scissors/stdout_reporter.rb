@@ -18,4 +18,8 @@ class StdoutReporter
   def move(name, move)
     puts "#{name}: #{move}"
   end
+  
+  def invalid(name)
+    puts "Player '#{name}' has made an invalid move and has forfeited the game."
+  end
 end

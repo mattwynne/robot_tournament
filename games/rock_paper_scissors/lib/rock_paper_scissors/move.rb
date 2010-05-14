@@ -10,7 +10,7 @@ class Move
   end
   
   def <=>(other)
-    raise(NeedToExecute) unless @value or @fail_message
+    raise(NeedToExecute) unless @value
     return 0 if other.value == self.value
     case @value
     when "fail"
@@ -37,6 +37,7 @@ class Move
   def result(value)
     @value = value
     @reporter.move(@player.name, value)
+    @reporter.invalid(@player.name) unless valid?
     self
   end
   
@@ -49,5 +50,10 @@ class Move
   
   protected
   attr_reader :value
+  
+  private
+  def valid?
+    ["rock", "paper", "scissors"].include?(@value)
+  end
 end
 

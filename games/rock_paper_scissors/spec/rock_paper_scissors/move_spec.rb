@@ -19,7 +19,7 @@ describe Move do
       subject.should be > other_move
     end
     
-    it "is greater than a nonsense move" do
+    it "is greater than an invalid move" do
       subject.should be > move("nonsense")
     end
   end
@@ -36,5 +36,12 @@ describe Move do
     it { should be < move("rock") }
     it { should be > move("paper") }
     it { should be > move("nonsense") }
+  end
+  
+  context "an invalid move" do
+    it "tells the reporter" do
+      reporter.should_receive(:invalid).with(subject.name)
+      move("silly")
+    end
   end
 end
