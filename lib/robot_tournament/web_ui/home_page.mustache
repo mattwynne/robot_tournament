@@ -8,22 +8,38 @@
         background-color: black;
         color: white;
         font-size: 12pt;
+        padding: 2px;
       }
       
       .match {
         margin-left: 10px;
         border: 4px dashed #aaa;
-        padding: 4px;
-        margin-top: 4px;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #eec;
       }
       
       .match h4 {
         padding: 2px;
+        margin: 2px;
+        text-decoration: underline;
       }
       
       .winner {
         font-size: 1.2em;
         font-weight: bold;
+        background-color: #00FFFF;
+      }
+      
+      h2.round {
+        background-color: #008C00;
+        color: white;
+        padding: 2px;
+      }
+      
+      td,th {
+        background-color: #eec;
+        padding: 2px;
       }
     </style>
   </head>
@@ -33,6 +49,12 @@
       {{#finished?}}
         <p>This tournament has finished.</p>
         <h2>And the winner is... <span id="winner">{{winner}}</span></h2>
+        <table id="league">
+          <tr><th>Player</th><th>Points</th></tr>
+          {{#league_table}}
+          <tr><td>{{player}}</td><td>{{points}}</td></tr>
+          {{/league_table}}
+        </table>
       {{/finished?}}
       {{^finished?}}
         <p>Next round begins in {{duration_until_next_round}}</p>
@@ -67,13 +89,11 @@
         {{#results}}
           <div class="match" />
             <h4>{{player1}} vs {{player2}}</h4>
-            <pre>
-{{output}}
-            </pre>
-            <p>Result: 
+            <pre>{{output}}</pre>
+            <div>Result: 
             {{#winner}}<span class="winner">{{winner}} wins{{/winner}}
             {{^winner}}Draw{{/winner}}
-            </p>
+            </div>
           </div>
         {{/results}}
       {{/finished_rounds}}
