@@ -23,9 +23,9 @@ describe Player do
     end
   end
   
-  describe "#move" do
-    it "runs the executable 'move' and returns the output" do
-      subject.move.strip.should == "hello"
+  describe "#==" do
+    it "is equal to another instance of Player for the same folder" do
+      subject.should == Player.new(subject.path)
     end
-  end
+  end  
 end
