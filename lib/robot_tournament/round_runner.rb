@@ -25,6 +25,7 @@ class RoundRunner
   
   def process_results(results)
     points = Hash.new(0)
+    players.each { |player| points[player.name] = 0 }
     results.each do |result|
       if result["winner"]
         points[result["winner"]] += 3

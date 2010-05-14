@@ -62,7 +62,8 @@ class Tournament
         points[row["player"]] += row["points"]
       end
     end
-    table = points.to_a.sort{ |a,b| a["points"] <=> b["points"] }
+    p points
+    table = points.to_a.sort{ |a,b| a[0] <=> b[0] }
     table.map { |player, points| { "player" => player, "points" => points } }
   end
   

@@ -23,10 +23,10 @@ describe RoundRunner do
       
       context "when results come in" do
         before(:each) do
-          game.should_receive(:play).
+          game.stub(:play).
             with(player1, player2).
             and_return [player1, "output as player1 wins"]
-          game.should_receive(:play).
+          game.stub(:play).
             with(player2, player1).
             and_return [nil, "output as draw happens"]
         end
@@ -58,6 +58,27 @@ describe RoundRunner do
           observer.should_receive(:results!).with(expected_results)
           subject.start!
         end
+      end
+
+      context "when one player loses every time" do
+        before(:each) do
+          game.stub(:play).
+            with(player1, player2).
+            and_return [player1, ""]
+          game.stub(:play).
+            with(player2, player1).
+            and_return [player1, ""]
+        end
+        
+        it "posts a league table containing all players, including the loser" do
+          expected_table = [
+            { "player" => "player1", "points" => 6 },
+            { "player" => "player2", "points" => 0 }
+          ]
+          observer.should_receive(:league_table!).with(expected_table)
+          subject.start!
+        end
+        
       end
     end
   end
