@@ -91,7 +91,7 @@ class Tournament
       round_path = @path + "/round_#{num}"
       FileUtils.mkdir_p(round_path)
       settings = {
-        "start_time" => Time.now + (@duration * 60),
+        "start_time" => Time.now + (@duration * 60 * index),
         "game"       => @game
       }
       File.open(round_path + '/settings.json', 'w') do |file|
