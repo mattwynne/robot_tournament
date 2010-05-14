@@ -1,36 +1,36 @@
+require 'move'
 class Game
   def initialize(players)
     @players = players
   end
   
   def play(reporter)
-    player1 = @players.first
-    player2 = @players.other(player1)
+    players = [@players.first, @players.other(@players.first)]
+    moves = players.map do |player| 
+      Move.new(player, reporter).execute
+    end
 
-    player1_move = player1.move
-    reporter.move(player1.name, player1.move)
-    player2_move = player2.move
-    reporter.move(player2.name, player2.move)
-    
-    if player1_move == player2_move
+    if moves[0] == moves[1]
       reporter.draw
       return
     end
     
-    wins = [
-      ["paper",    "rock"],
-      ["scissors", "paper"],
-      ["rock",     "scissors"],
-    ]
-    
-    wins.each do |winner, loser|
-      if player1_move == winner and player2_move == loser
-        reporter.winner(player1)
-        break
-      elsif player1_move == loser and player2_move == winner
-        reporter.winner(player2)
-        break
-      end
+    sorted_moves = moves.sort.reverse
+    winner = sorted_moves.first.player
+    reporter.winner(winner)
+  end
+  
+  private
+  
+  def move(player, reporter)
+    begin
+      result = player.move
+    rescue FailedToMoveError => e
+      reporter.move(player.name, e.message)
+      reporter.fail(player.name)
+      return nil
     end
+    reporter.move(player.name, result)
+    result
   end
 end

@@ -4,6 +4,15 @@ require 'time'
 require 'robot_tournament/round'
 
 class Tournament
+  class << self
+    def kick
+      current.kick
+    end
+    
+    def current
+      TournamentStore.new.current
+    end
+  end
   attr_reader :name
   
   def initialize(path)

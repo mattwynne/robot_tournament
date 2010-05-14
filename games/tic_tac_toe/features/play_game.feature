@@ -108,3 +108,11 @@ Feature: Play game
   Scenario: Player dies and throws an exception to STDERR
   
   Scenario: Player dies and throws an exception to STDOUT
+  
+  Scenario: Player takes too long to make a move
+    Given context
+    When event
+    Then outcome
+  
+  
+  

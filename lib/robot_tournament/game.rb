@@ -2,6 +2,10 @@ require 'open3'
 class BrokenGameEngineError < StandardError; end
 
 class Game
+  def self.games
+    Dir[RobotTournament.base_dir + '/games/*'].map { |path| File.basename(path) }
+  end
+  
   def initialize(name)
     @game_cmd = games_path + "/#{name}/bin/#{name}"
     unless File.exists?(@game_cmd)

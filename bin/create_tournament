@@ -4,15 +4,23 @@ require 'trollop'
 
 opts = Trollop::options do
   opt :name, "Tournament name", :required => true, :type => :string
+  opt :game, "Game to play. Available games: #{Game.games.join(", ")}", :required => true, :type => :string
   opt :rounds, "Number of rounds", :default => 5, :type => :int
   opt :duration, "Length of each round (in minutes)", :default => 10, :type => :int
   opt :force, "Delete any existing tournament", :default => false
 end
 
+unless Game.games.include?(opts[:game])
+  Trollop::die(
+    %Q{I don't recognise the game "#{opts[:game]}".\n
+    Please specify one of the real games: #{Game.games.join(", ")}})
+end
+
 attributes = {
   :name => opts[:name],
   :rounds => opts[:rounds],
-  :duration => opts[:duration]
+  :duration => opts[:duration],
+  :game => opts[:game]
 }
 
 tournaments = TournamentStore.new
