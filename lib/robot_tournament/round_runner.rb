@@ -9,6 +9,7 @@ class RoundRunner
     results = []
     each_pair do |player1, player2|
       winner, output = @game.play(player1, player2)
+      winner = winner.name if winner.respond_to?(:name)
       results << [ player1.name, player2.name, winner, output ]
     end
     @observer.results!(results)
