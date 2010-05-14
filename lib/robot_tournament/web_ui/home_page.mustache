@@ -37,7 +37,14 @@
       {{^finished?}}
         <p>Next round begins in {{duration_until_next_round}}</p>
         {{#winner}}
-        <p>Current leader: {{winner}}</p>
+        <p>Current leader: <span id="winner">{{winner}}</span></p>
+
+        <table id="league">
+          <tr><th>Player</th><th>Points</th></tr>
+          {{#league_table}}
+          <tr><td>{{player}}</td><td>{{points}}</td></tr>
+          {{/league_table}}
+        </table>
         {{/winner}}
       
         <h2>Players registered:</h2>

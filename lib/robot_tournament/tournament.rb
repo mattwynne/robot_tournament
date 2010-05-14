@@ -26,13 +26,18 @@ class Tournament
   end
   
   def kick
+    return unless next_round
     next_round.kick
   end
   
   def duration_until_next_round
     return nil unless next_round
-    wait = (next_round.start_time - Time.now).to_i
-    ChronicDuration.output(wait, :format => :long)
+    ChronicDuration.output(seconds_until_next_round, :format => :long)
+  end
+  
+  def seconds_until_next_round
+    return nil unless next_round
+    (next_round.start_time - Time.now).to_i
   end
   
   def players
@@ -46,7 +51,7 @@ class Tournament
   
   def winner
     return nil unless league_table.any?
-    league_table[0][0]
+    league_table.first["player"]
   end
   
   def league_table
@@ -57,7 +62,8 @@ class Tournament
         points[row["player"]] += row["points"]
       end
     end
-    points.to_a.sort{ |a,b| a[1] <=> b[1] }
+    table = points.to_a.sort{ |a,b| a["points"] <=> b["points"] }
+    table.map { |player, points| { "player" => player, "points" => points } }
   end
   
   def finished_rounds

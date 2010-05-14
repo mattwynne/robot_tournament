@@ -1,4 +1,6 @@
 require 'chronic_duration'
+require 'spec/expectations'
+require 'cucumber/web/tableish'
 
 When /^(?:I create )?a(?: new)? Tournament "([^\"]*)" with the following attributes:$/ do |name, table|
   attributes = table.rows_hash
@@ -24,8 +26,10 @@ Then /^I should see that no players are registered for the Round$/ do
   page.should have_content "no players"
 end
 
-Then /^I should see that 'always\-paper' is the winner$/ do
-  find("//*[@id='winner']").text.should == "always-paper"
+Then /^I should see that "(.*)" is (?:the winner|winning)$/ do |name|
+  winner = find("//*[@id='winner']")
+  winner.should_not be_nil
+  winner.text.should == name
 end
 
 When /^the engine is kicked$/ do
@@ -46,4 +50,22 @@ Then /^I should see that 2 matches were played in each round$/ do
   finished_rounds.each do |round|
     round.all("//*[@class='match']").length.should == 2
   end
+end
+
+When /^the first round has been played$/ do
+  before = tournament.finished_rounds.length
+  secs = tournament.seconds_until_next_round + 1
+  When "#{secs} seconds pass"
+  tournament.kick
+end
+
+Then /^I should see that the first round has finished$/ do
+  page.all("//*[@class='finished round']").length.should == 1
+end
+
+Then /^I should see that the league table looks like:$/ do |table|
+  html_table = tableish("table#league tr", "td,th")
+  # downcase col headers to match ruby
+  html_table[0] = html_table[0].map{ |cell| cell.downcase } 
+  table.diff!(html_table)
 end
