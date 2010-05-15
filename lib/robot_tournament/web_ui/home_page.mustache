@@ -92,6 +92,12 @@
       {{/finished_rounds?}}
       {{#finished_rounds}}
         <h2 class="finished round">{{name}}</h2>
+        <h3>Players</h3>
+        <ul>
+        {{#players}}
+          <li>{{name}}</li>
+        {{/players}}
+        </ul>
         <h3>Results</h3>
         {{#results}}
           <div class="match" />

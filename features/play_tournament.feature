@@ -19,7 +19,9 @@ Feature: Play tournament
       | always-rock | 6      |
       | friendly    | 0      |
     And I should see that there are 2 of 3 rounds still to be played
-    When a player "always-paper" who always says "paper" joins
+    When a player "always-paper" who always says "paper" joins the next round
+    And the player "always-rock" who always says "rock" joins the next round
+    And the player "friendly" who always says "hello" joins the next round
     And the next round has been played
     And I go to the homepage
     Then I should see that the lead is tied between "always-paper" and "always-rock"

@@ -72,3 +72,7 @@ end
 Then /^I should see that there (?:is|are) (\d+) of (\d+) rounds still to be played$/ do |remaining, total|
   page.should have_content("#{remaining} of #{total} rounds remaining")
 end
+
+Then /^I should see that the lead is tied between "([^\"]*)" and "([^\"]*)"$/ do |player1, player2|
+  page.should have_content("#{player1} and #{player2} are tied")
+end

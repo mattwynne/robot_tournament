@@ -1,4 +1,4 @@
-Given /^a player "(.*)" who always says "(.*)"/ do |player_name, move|
+Given /^(?:a|the) player "(.*)" who always says "(.*)"/ do |player_name, move|
   Given %{a file named "#{player_name}/move" with:}, <<-MOVE
 #!/usr/bin/env bash
 echo "#{move}"

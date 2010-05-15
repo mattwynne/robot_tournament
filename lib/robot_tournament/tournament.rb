@@ -30,67 +30,14 @@ class Tournament
     next_round.kick
   end
   
-  def unfinished_rounds_count
-    remaining_rounds.length
-  end
-  
-  def total_rounds_count
-    rounds.length
-  end
-  
-  def remaining_rounds
-    rounds.select { |round| !round.finished? }
-  end
-  
-  def finished_rounds?
-    finished_rounds.any?
-  end
-  
-  def duration_until_next_round
-    return nil unless next_round
-    ChronicDuration.output(seconds_until_next_round, :format => :long)
+  def store_player_upload(upload)
+    next_round.store_player_upload(upload)
   end
   
   def seconds_until_next_round
     return nil unless next_round
     (next_round.start_time - Time.now).to_i
   end
-  
-  def players
-    return nil unless next_round
-    next_round.players
-  end
-  
-  def store_player_upload(upload)
-    next_round.store_player_upload(upload)
-  end
-  
-  def winner
-    return nil unless league_table.any?
-    league_table.first["player"]
-  end
-  
-  def league_table
-    tables = rounds.select { |round| round.finished? }.map { |round| round.league_table }
-    points = Hash.new(0)
-    tables.each do |table|
-      table.each do |row|
-        points[row["player"]] += row["points"]
-      end
-    end
-    table = points.to_a.sort{ |a,b| a[0] <=> b[0] }
-    table.map { |player, points| { "player" => player, "points" => points } }
-  end
-  
-  def finished_rounds
-    rounds.select { |round| round.finished? }
-  end
-  
-  def finished?
-    rounds.all? { |round| round.finished? }
-  end
-  
-  private
   
   def next_round
     rounds.detect { |round| !round.started? }
@@ -100,6 +47,8 @@ class Tournament
     path = @path + '/round_*'
     Dir[path].sort.map { |path| Round.new(path) }
   end
+  
+  private
   
   def create_rounds
     @num_rounds.times do |index|

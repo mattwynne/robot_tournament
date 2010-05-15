@@ -1,4 +1,6 @@
 require 'mustache'
+require 'robot_tournament/web_ui/tournament_presenter'
+
 class HomePage < Mustache
   self.template_path = File.dirname(__FILE__)
   
@@ -11,6 +13,6 @@ class HomePage < Mustache
   end
   
   def tournament
-    TournamentStore.new.current
+    TournamentPresenter.new(Tournament.current)
   end
 end
