@@ -30,6 +30,22 @@ class Tournament
     next_round.kick
   end
   
+  def unfinished_rounds_count
+    remaining_rounds.length
+  end
+  
+  def total_rounds_count
+    rounds.length
+  end
+  
+  def remaining_rounds
+    rounds.select { |round| !round.finished? }
+  end
+  
+  def finished_rounds?
+    finished_rounds.any?
+  end
+  
   def duration_until_next_round
     return nil unless next_round
     ChronicDuration.output(seconds_until_next_round, :format => :long)
@@ -91,7 +107,7 @@ class Tournament
       round_path = @path + "/round_#{num}"
       FileUtils.mkdir_p(round_path)
       settings = {
-        "start_time" => Time.now + (@duration * 60 * index),
+        "start_time" => Time.now + (@duration * 60 * num),
         "game"       => @game
       }
       File.open(round_path + '/settings.json', 'w') do |file|

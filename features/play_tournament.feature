@@ -18,7 +18,7 @@ Feature: Play tournament
       | player      | points |
       | always-rock | 6      |
       | friendly    | 0      |
-    And I should see that there is 1 round still to be played
+    And I should see that there are 2 of 3 rounds still to be played
     When a player "always-paper" who always says "paper" joins
     And the next round has been played
     And I go to the homepage

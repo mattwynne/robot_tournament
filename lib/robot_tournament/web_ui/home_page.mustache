@@ -45,9 +45,8 @@
   </head>
   <body>
     {{#tournament}}
-      <h1>Tournament: "{{name}}"</h1>
       {{#finished?}}
-        <p>This tournament has finished.</p>
+        <h1>Finished Tournament: "{{name}}"</h1>
         <h2>And the winner is... <span id="winner">{{winner}}</span></h2>
         <table id="league">
           <tr><th>Player</th><th>Points</th></tr>
@@ -57,16 +56,20 @@
         </table>
       {{/finished?}}
       {{^finished?}}
-        <p>Next round begins in {{duration_until_next_round}}</p>
+        <h1>Running Tournament: "{{name}}"</h1>
+        <p>
+          <b>{{unfinished_rounds_count}}</b> of {{total_rounds_count}} rounds remaining.
+          Next round begins in {{duration_until_next_round}}.
+        </p>
         {{#winner}}
-        <p>Current leader: <span id="winner">{{winner}}</span></p>
+          <p>Current leader: <span id="winner">{{winner}}</span></p>
 
-        <table id="league">
-          <tr><th>Player</th><th>Points</th></tr>
-          {{#league_table}}
-          <tr><td>{{player}}</td><td>{{points}}</td></tr>
-          {{/league_table}}
-        </table>
+          <table id="league">
+            <tr><th>Player</th><th>Points</th></tr>
+            {{#league_table}}
+            <tr><td>{{player}}</td><td>{{points}}</td></tr>
+            {{/league_table}}
+          </table>
         {{/winner}}
       
         <h2>Players registered:</h2>
@@ -75,7 +78,7 @@
           <li>{{name}}</li>
         {{/players}}
         {{^players}}
-          <li>There are no players registered</li>
+          <li>There are no players registered for this round yet.</li>
         {{/players}}
         </ul>
         <p>To register a player, use a command something like this:</p>
@@ -83,6 +86,10 @@
           curl {{upload_path}} --data-binary @my-player.zip
         </pre>
       {{/finished?}}
+      {{#finished_rounds?}}
+        <hr/>
+        <h2>Finished Rounds</h2>
+      {{/finished_rounds?}}
       {{#finished_rounds}}
         <h2 class="finished round">{{name}}</h2>
         <h3>Results</h3>
