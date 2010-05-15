@@ -7,9 +7,9 @@ class StdoutReporter
     puts "FOUL! player #{symbol} has #{message} and loses by default"
   end
   
-  def winner(symbol, board_state)
+  def winner(name, board_state)
     state(board_state)
-    puts "Result: #{symbol} wins"
+    puts "Result: #{name} wins"
   end
   
   def draw(board_state)

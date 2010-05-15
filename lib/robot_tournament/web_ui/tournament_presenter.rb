@@ -61,7 +61,7 @@ class TournamentPresenter
         points[row["player"]] += row["points"]
       end
     end
-    table = points.to_a.sort{ |a,b| a[0] <=> b[0] }
+    table = points.to_a.sort{ |a,b| a[1] <=> b[1] }.reverse
     table.map { |player, points| { "player" => player, "points" => points } }
   end
   

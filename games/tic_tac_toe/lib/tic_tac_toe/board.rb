@@ -1,9 +1,10 @@
 class Board
   class AlreadyOccupiedError < StandardError; end
   
-  def initialize(observer)
+  def initialize(observer, players)
     @observer = observer
     @grid = Array.new(9) { '-' }
+    @players = players
   end
   
   def state
@@ -65,6 +66,12 @@ class Board
   end
   
   def winner
+    player = @players[winner_symbol]
+    return player.name if player
+    nil
+  end
+  
+  def winner_symbol
     return opposide_of(@loser) if @loser
     possible_lines.each do |line|
       content = line.map { |index| @grid[index] }

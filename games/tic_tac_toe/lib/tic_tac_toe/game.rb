@@ -11,7 +11,7 @@ class Game
   end
   
   def play(reporter)
-    board = Board.new(reporter)
+    board = Board.new(reporter, @players)
     until board.done?
       reporter.state(board.state)
       move = @current_player.move(board, reporter)

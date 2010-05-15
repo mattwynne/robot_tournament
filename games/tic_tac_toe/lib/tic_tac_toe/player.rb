@@ -1,5 +1,6 @@
 require 'tempfile'
 class Player
+  attr_reader :symbol
   def initialize(path, symbol)
     @path = path
     @symbol = symbol
@@ -26,6 +27,10 @@ class Player
     end
   end
 
+  def name
+    File.basename(@path)
+  end
+  
   private
   
   def handle_good_move(move, reporter, board)
@@ -36,10 +41,6 @@ class Player
   def handle_bad_move(message, reporter, board)
     reporter.move(message, @symbol)
     board.loser!(@symbol, "returned a non-zero exit status")
-  end
-  
-  def name
-    File.basename(@path)
   end
   
 end

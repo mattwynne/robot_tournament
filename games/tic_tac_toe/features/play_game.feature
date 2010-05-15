@@ -54,7 +54,7 @@ Feature: Play game
       oxxo-----
       o move: 6
       oxxo--o--
-      Result: o wins
+      Result: downwards wins
       
       """
 
@@ -99,7 +99,7 @@ Feature: Play game
       x move: 1
       FOUL! player x has attempted to play on an already-taken space and loses by default
       -o-------
-      Result: o wins
+      Result: blocker wins
       
       """
   
@@ -119,7 +119,7 @@ Feature: Play game
       o move: 99 flake
       FOUL! player o has attempted to play an illegal move and loses by default
       ---------
-      Result: x wins
+      Result: blocker wins
       
       """
   
@@ -140,7 +140,7 @@ Feature: Play game
       o move: this is my exception
       FOUL! player o has returned a non-zero exit status and loses by default
       ---------
-      Result: x wins
+      Result: blocker wins
     
       """
   
@@ -161,7 +161,7 @@ Feature: Play game
       o move: this is my weak error handling
       FOUL! player o has returned a non-zero exit status and loses by default
       ---------
-      Result: x wins
+      Result: blocker wins
   
       """
   

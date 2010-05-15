@@ -9,6 +9,10 @@ class Players
     @players.each { |player| player.report_to(reporter) }
   end
   
+  def [](symbol)
+    @players.find{ |p| p.symbol == symbol}
+  end
+  
   def first
     @players.first
   end

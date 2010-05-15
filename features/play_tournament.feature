@@ -25,11 +25,6 @@ Feature: Play tournament
     And the next round has been played
     And I go to the homepage
     Then I should see that the lead is tied between "always-paper" and "always-rock"
-    And I should see that the league table looks like:
-      | player       | points |
-      | always-paper | 12     |
-      | always-rock  | 12     |
-      | friendly     | 0      |
     And I should see that there is 1 of 3 rounds still to be played
     When a player "always-paper" who always says "paper" joins the next round
     And the player "always-rock" who always says "rock" joins the next round
