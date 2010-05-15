@@ -26,7 +26,7 @@ class Player
     
     cmd = "#{@path}/move"
     stdout = Timeout.timeout(Player.max_move_secs) do
-      Dir.chdir(@path)
+      Dir.chdir(@path) do
         IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
       end
     end
