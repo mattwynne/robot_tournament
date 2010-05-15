@@ -26,7 +26,9 @@ class Player
     
     cmd = "#{@path}/move"
     stdout = Timeout.timeout(Player.max_move_secs) do
-      IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+      Dir.chdir(@path)
+        IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+      end
     end
     stderr = IO.read(stderr_file.path)
     if $?.exitstatus == 0
