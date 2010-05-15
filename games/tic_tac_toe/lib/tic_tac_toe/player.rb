@@ -14,7 +14,9 @@ class Player
     stderr_file.close
     
     cmd = "#{@path}/move #{board.state}"
-    stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    Dir.chdir(@path) do
+      stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    end
     stderr = IO.read(stderr_file.path)
     
     if $?.exitstatus == 0
