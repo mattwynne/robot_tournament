@@ -47,7 +47,7 @@
     {{#tournament}}
       {{#finished?}}
         <h1>Finished Tournament: "{{name}}"</h1>
-        <h2>And the winner is... <span id="winner">{{winner}}</span></h2>
+        <h2>And the winner is... <span class="tournament winner">{{winner}}</span></h2>
         <table id="league">
           <tr><th>Player</th><th>Points</th></tr>
           {{#league_table}}
@@ -57,8 +57,8 @@
       {{/finished?}}
       {{^finished?}}
         <h1>Running Tournament: "{{name}}"</h1>
-        {{#winner}}
-          <p>Current leader: <span id="winner">{{winner}}</span></p>
+        {{#winner?}}
+          <p>Current leader: <span class="tournament winner">{{winner}}</span></p>
 
           <table id="league">
             <tr><th>Player</th><th>Points</th></tr>
@@ -66,7 +66,7 @@
             <tr><td>{{player}}</td><td>{{points}}</td></tr>
             {{/league_table}}
           </table>
-        {{/winner}}
+        {{/winner?}}
         <h2>Next Round</h2>
         <p>
           {{next_round_name}} (of {{total_rounds_count}}) begins in {{duration_until_next_round}}.

@@ -17,7 +17,7 @@ Feature: Upload player
       echo "ready"
       
       """
-    When I zip up the folder and upload the data to '/players'
+    When I zip up the folder and upload the data to "/players"
     Then the response should be 200 OK
     And I should see "Received new player 'bash_robot' OK" in the response
     
@@ -28,7 +28,7 @@ Feature: Upload player
       puts "ready"
       
       """
-    When I zip up the folder and upload the data to '/players'
+    When I zip up the folder and upload the data to "/players"
     Then the response should be 200 OK
     And I should see "ruby_robot" in the response
 
@@ -44,6 +44,6 @@ Feature: Upload player
       main = putStr "ready"
       
       """
-    When I zip up the folder and upload the data to '/players'
+    When I zip up the folder and upload the data to "/players"
     Then the response should be 200 OK
     And I should see "haskell_robot" in the response

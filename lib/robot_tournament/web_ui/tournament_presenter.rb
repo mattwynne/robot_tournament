@@ -1,3 +1,5 @@
+require 'robot_tournament/league_table'
+
 class TournamentPresenter
   def initialize(tournament)
     @tournament = tournament
@@ -37,9 +39,18 @@ class TournamentPresenter
     next_round.players
   end
   
+  def winner?
+    league_table.any?
+  end
+  
   def winner
     return nil unless league_table.any?
-    league_table.first["player"]
+    leaders = LeagueTable.new(league_table).leaders
+    if leaders.length == 1
+      leaders.first
+    else
+      "it's a tie"
+    end
   end
   
   def league_table

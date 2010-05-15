@@ -18,7 +18,7 @@ Then /^I should see that the Tournament "([^\"]*)" is in progress$/ do |name|
 end
 
 Then /^I should see that the first Round will begin in less than 10 minutes$/ do
-  duration = page.body.scan(/Next round begins in (.*)/).flatten.first
+  duration = page.body.scan(/begins in (.*)/).flatten.first
   ChronicDuration.parse(duration).should be < (10 * 60)
 end
 
@@ -26,8 +26,8 @@ Then /^I should see that no players are registered for the Round$/ do
   page.should have_content "no players"
 end
 
-Then /^I should see that "(.*)" is (?:the winner|winning)$/ do |name|
-  winner = find("//*[@id='winner']")
+Then /^I should see that "(.*)" (?:is the winner|is winning|has won)$/ do |name|
+  winner = find("//*[@class='tournament winner']")
   winner.should_not be_nil
   winner.text.should == name
 end
@@ -77,5 +77,5 @@ Then /^I should see that there (?:is|are) (\d+) of (\d+) rounds still to be play
 end
 
 Then /^I should see that the lead is tied between "([^\"]*)" and "([^\"]*)"$/ do |player1, player2|
-  page.should have_content("#{player1} and #{player2} are tied")
+  page.should have_content("it's a tie")
 end

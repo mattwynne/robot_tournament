@@ -30,7 +30,11 @@ Feature: Play tournament
       | always-paper | 12     |
       | always-rock  | 12     |
       | friendly     | 0      |
-    When the next round has been played
+    And I should see that there is 1 of 3 rounds still to be played
+    When a player "always-paper" who always says "paper" joins the next round
+    And the player "always-rock" who always says "rock" joins the next round
+    And the player "friendly" who always says "hello" joins the next round
+    And the next round has been played
     And I go to the homepage
     Then I should see that "always-paper" has won
     And I should see that the league table looks like:
