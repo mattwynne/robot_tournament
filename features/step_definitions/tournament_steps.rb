@@ -52,8 +52,7 @@ Then /^I should see that 2 matches were played in each round$/ do
   end
 end
 
-When /^the first round has been played$/ do
-  before = tournament.finished_rounds.length
+When /^the (?:first|next) round has been played$/ do
   secs = tournament.seconds_until_next_round + 1
   When "#{secs} seconds pass"
   tournament.kick
