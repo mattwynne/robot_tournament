@@ -104,15 +104,86 @@ Feature: Play game
       """
   
   Scenario: Player makes an illegal move
+    Given a player "mistaken" who moves like this:
+      """
+      #!/usr/bin/env ruby
+      puts "99 flake"
+
+      """
+    When a game is played between "mistaken" and "blocker"
+    Then I should see exactly:
+      """
+      player o: 'faulty'
+      player x: 'blocker'
+      ---------
+      o move: 99 flake
+      FOUL! player o has attempted to play an illegal move and loses by default
+      ---------
+      Result: x wins
+      
+      """
   
   Scenario: Player dies and throws an exception to STDERR
+    Given a player "buggy" who moves like this:
+      """
+      #!/usr/bin/env ruby
+      STDERR.puts "this is my exception"
+      exit 1
+
+      """
+    When a game is played between "buggy" and "blocker"
+    Then I should see exactly:
+      """
+      player o: 'buggy'
+      player x: 'blocker'
+      ---------
+      o move: this is my exception
+      FOUL! player o has returned a non-zero exit status and loses by default
+      ---------
+      Result: x wins
+    
+      """
   
   Scenario: Player dies and throws an exception to STDOUT
+    Given a player "crap" who moves like this:
+      """
+      #!/usr/bin/env ruby
+      puts "this is my weak error handling"
+      exit 1
+
+      """
+    When a game is played between "crap" and "blocker"
+    Then I should see exactly:
+      """
+      player o: 'buggy'
+      player x: 'blocker'
+      ---------
+      o move: this is my weak error handling
+      FOUL! player o has returned a non-zero exit status and loses by default
+      ---------
+      Result: x wins
+  
+      """
   
   Scenario: Player takes too long to make a move
-    Given context
-    When event
-    Then outcome
-  
-  
-  
+    Given the maximum seconds allowed for a move is 1.0
+    And a player "slow" who moves like this:
+      """
+      #!/usr/bin/env ruby
+      sleep 1
+
+      """
+    When a game is played between "blocker" and "slow"
+    Then I should see exactly:
+      """
+      player o: 'blocker'
+      player x: 'slow'
+      ---------
+      o move: 1
+      -o-------
+      x move: 
+      FOUL! player x has taken more than 1.0 second(s) to move and loses by default
+      -o-------
+      Result: o wins
+    
+      """
