@@ -70,7 +70,10 @@ Then /^I should see that the league table looks like:$/ do |table|
 end
 
 Then /^I should see that there (?:is|are) (\d+) of (\d+) rounds still to be played$/ do |remaining, total|
-  page.should have_content("#{remaining} of #{total} rounds remaining")
+  total = total.to_i
+  remaining = remaining.to_i
+  next_round = total - remaining + 1
+  page.should have_content("Round #{next_round} (of #{total})")
 end
 
 Then /^I should see that the lead is tied between "([^\"]*)" and "([^\"]*)"$/ do |player1, player2|

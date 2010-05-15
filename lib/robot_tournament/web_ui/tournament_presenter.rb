@@ -7,6 +7,10 @@ class TournamentPresenter
     @tournament.name
   end
   
+  def next_round_name
+    next_round.name
+  end
+  
   def unfinished_rounds_count
     remaining_rounds.length
   end

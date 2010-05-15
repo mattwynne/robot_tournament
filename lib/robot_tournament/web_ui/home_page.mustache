@@ -57,10 +57,6 @@
       {{/finished?}}
       {{^finished?}}
         <h1>Running Tournament: "{{name}}"</h1>
-        <p>
-          <b>{{unfinished_rounds_count}}</b> of {{total_rounds_count}} rounds remaining.
-          Next round begins in {{duration_until_next_round}}.
-        </p>
         {{#winner}}
           <p>Current leader: <span id="winner">{{winner}}</span></p>
 
@@ -71,8 +67,12 @@
             {{/league_table}}
           </table>
         {{/winner}}
+        <h2>Next Round</h2>
+        <p>
+          {{next_round_name}} (of {{total_rounds_count}}) begins in {{duration_until_next_round}}.
+        </p>
       
-        <h2>Players registered:</h2>
+        <h3>Players</h3>
         <ul>
         {{#players}}
           <li>{{name}}</li>
