@@ -9,14 +9,27 @@ class Board
   def state
     @grid.join
   end
+  
+  def loser!(symbol, reason)
+    @loser = symbol
+    @observer.foul(symbol, reason)
+    report_any_result
+  end
 
   def move!(move, symbol)
-    if already_occupied?(move)
-      @observer.foul(symbol)
-      @loser = symbol
-    else
-      @grid[move] = symbol
+    if illegal?(move)
+      loser!(symbol, "attempted to play an illegal move")
+      return
     end
+    
+    move = move.to_i
+    
+    if already_occupied?(move)
+      loser!(symbol, "attempted to play on an already-taken space")
+      return
+    end
+    
+    @grid[move] = symbol
     report_any_result
   end
   
@@ -25,6 +38,18 @@ class Board
   end
   
   private
+  
+  def illegal?(move)
+    return true unless integer?(move)
+    return true if move.to_i > @grid.length
+  end
+  
+  def integer?(move)
+    Integer(move)
+    return true
+  rescue ArgumentError
+    return false
+  end
   
   def report_any_result
     return unless done?

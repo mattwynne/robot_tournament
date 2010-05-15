@@ -113,7 +113,7 @@ Feature: Play game
     When a game is played between "mistaken" and "blocker"
     Then I should see exactly:
       """
-      player o: 'faulty'
+      player o: 'mistaken'
       player x: 'blocker'
       ---------
       o move: 99 flake
@@ -155,7 +155,7 @@ Feature: Play game
     When a game is played between "crap" and "blocker"
     Then I should see exactly:
       """
-      player o: 'buggy'
+      player o: 'crap'
       player x: 'blocker'
       ---------
       o move: this is my weak error handling

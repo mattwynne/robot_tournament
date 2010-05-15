@@ -14,9 +14,7 @@ class Game
     board = Board.new(reporter)
     until board.done?
       reporter.state(board.state)
-      move = @current_player.move(board)
-      reporter.move(move, @current_player.symbol)
-      board.move!(move, @current_player.symbol)
+      move = @current_player.move(board, reporter)
       switch_players!
     end
   end

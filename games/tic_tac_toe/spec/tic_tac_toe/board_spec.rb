@@ -30,7 +30,7 @@ describe Board do
     
     context "when a player tries to update a square that is already occupied" do
       it "signals that the player has fouled" do
-        game.should_receive(:foul).with('x')
+        game.should_receive(:foul).with('x','attempted to play on an already-taken space')
         subject.move!(0, 'x')
         subject.move!(0, 'x')
       end

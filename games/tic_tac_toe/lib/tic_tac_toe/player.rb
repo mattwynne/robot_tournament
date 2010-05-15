@@ -1,6 +1,5 @@
 require 'tempfile'
 class Player
-  attr_reader :symbol
   def initialize(path, symbol)
     @path = path
     @symbol = symbol
@@ -10,19 +9,32 @@ class Player
     reporter.player(name, @symbol)
   end
   
-  def move(board)
+  def move(board, reporter)
     stderr_file = Tempfile.new('game')
     stderr_file.close
     
     cmd = "#{@path}/move #{board.state}"
     stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
     stderr = IO.read(stderr_file.path)
-    raise("failed to call player #{@path}: #{stderr}") unless $?.exitstatus == 0
-
-    stdout.to_i
+    
+    if $?.exitstatus == 0
+      handle_good_move(stdout, reporter, board)
+    else
+      handle_bad_move(stdout + stderr, reporter, board)
+    end
   end
 
   private
+  
+  def handle_good_move(move, reporter, board)
+    reporter.move(move, @symbol)
+    board.move!(move, @symbol)
+  end
+  
+  def handle_bad_move(message, reporter, board)
+    reporter.move(message, @symbol)
+    board.loser!(@symbol, "returned a non-zero exit status")
+  end
   
   def name
     File.basename(@path)

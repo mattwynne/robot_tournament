@@ -3,8 +3,8 @@ class StdoutReporter
     puts "player #{symbol}: '#{path}'"
   end
   
-  def foul(symbol)
-    puts "FOUL! player #{symbol} has attempted to play on an already-taken space and loses by default"
+  def foul(symbol, message)
+    puts "FOUL! player #{symbol} has #{message} and loses by default"
   end
   
   def winner(symbol, board_state)
