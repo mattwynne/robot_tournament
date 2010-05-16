@@ -1,13 +1,14 @@
-* Ugly error feedback when curl submission goes wrong
-* Easier way for windows users to upload
-* Show something else when tournament is running
-* fix tic_tac_toe spec
 * timeout resilience on tic_tac_toe
-* slides for intro
-* bin to manually trigger next round now!
-* tic_tac_toe allow 0 as well as o
+
 * rock_paper_scissors allow upper case too
+
+* Ugly error feedback when curl submission goes wrong
 * friendly error when uploading to a tournament that's ended
 * show round that your player has been entered into?
+
+* Easier way for windows users to upload
+* Show something else when tournament is running
+* slides for intro
+* bin to manually trigger next round now!
 * test with 10 rounds. looked weird.
 * show rounds upside down
