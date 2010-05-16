@@ -1,4 +1,6 @@
 require 'tempfile'
+require 'timeout'
+
 class Player
   class << self
     attr_accessor :max_move_secs
@@ -21,7 +23,9 @@ class Player
     
     cmd = "#{@path}/move #{board.state}"
     stdout = Dir.chdir(@path) do
-      IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+      Timeout.timeout(Player.max_move_secs) do
+        IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+      end
     end
     stderr = IO.read(stderr_file.path)
     
@@ -30,6 +34,8 @@ class Player
     else
       board.loser!(stdout + stderr, @symbol, "returned a non-zero exit status")
     end
+  rescue Timeout::Error
+    board.loser!("", @symbol, "taken longer than #{Player.max_move_secs} second(s) to move")
   end
 
   def name

@@ -1,6 +1,6 @@
 class StdoutReporter
-  def player(path, symbol)
-    puts "player #{symbol}: '#{path}'"
+  def player(name, symbol)
+    puts "player #{symbol}: '#{name}'"
   end
   
   def foul(symbol, message)

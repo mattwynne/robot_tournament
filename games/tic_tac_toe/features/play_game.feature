@@ -182,8 +182,8 @@ Feature: Play game
       0 move: 1
       -0-------
       x move: 
-      FOUL! player x has taken more than 1.0 second(s) t0 move and loses by default
+      FOUL! player x has taken longer than 1.0 second(s) to move and loses by default
       -0-------
-      Result: o wins
+      Result: blocker wins
     
       """
