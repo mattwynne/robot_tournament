@@ -1,6 +1,13 @@
-* Make the actual tournament engine, because that's fucking core
-* Make a manual upload button
-* Make some example robots in different languages
-* think about how to tweak the rules
-* validate players on upload
-  (e.g. no name, no play command etc`)
+* Ugly error feedback when curl submission goes wrong
+* Easier way for windows users to upload
+* Show something else when tournament is running
+* fix tic_tac_toe spec
+* timeout resilience on tic_tac_toe
+* slides for intro
+* bin to manually trigger next round now!
+* tic_tac_toe allow 0 as well as o
+* rock_paper_scissors allow upper case too
+* friendly error when uploading to a tournament that's ended
+* show round that your player has been entered into?
+* test with 10 rounds. looked weird.
+* show rounds upside down
