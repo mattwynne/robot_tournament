@@ -11,17 +11,17 @@ class Move
   
   def <=>(other)
     raise(NeedToExecute) unless @value
-    return 0 if other.value == self.value
+    return 0 if other.value.downcase == self.value.downcase
     return -1 unless valid?
-    case @value
+    case @value.downcase
     when "fail"
       return -1
     when "rock"
-      return (other.value == "paper")    ? -1 : 1
+      return (other.value.downcase == "paper")    ? -1 : 1
     when "paper"
-      return (other.value == "scissors") ? -1 : 1
+      return (other.value.downcase == "scissors") ? -1 : 1
     when "scissors"
-      return (other.value == "rock")     ? -1 : 1
+      return (other.value.downcase == "rock")     ? -1 : 1
     end
     raise("don't know how to compare #{other.value} with #{@value}")
   end
@@ -60,7 +60,7 @@ class Move
   
   private
   def valid?
-    ["rock", "paper", "scissors"].include?(@value)
+    ["rock", "paper", "scissors"].include?(@value.downcase)
   end
 end
 

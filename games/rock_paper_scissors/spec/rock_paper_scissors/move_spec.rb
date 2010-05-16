@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'move'
 
 describe Move do
   def move(value)
@@ -13,6 +14,7 @@ describe Move do
 
     it { should be < move("paper") }
     it { should be > move("scissors") }
+    it { should be == move("ROCK") }
   
     it "is greater than a move that failed" do
       other_move = Move.new(player, reporter).fail("badness")
@@ -27,6 +29,7 @@ describe Move do
   context "paper" do
     subject { move("paper") }
     it { should be < move("scissors") }
+    it { should be < move("sciSSors") }
     it { should be > move("rock") }
     it { should be > move("nonsense") }
   end
@@ -35,6 +38,7 @@ describe Move do
     subject { move("scissors") }
     it { should be < move("rock") }
     it { should be > move("paper") }
+    it { should be > move("PAPER") }
     it { should be > move("nonsense") }
   end
   
