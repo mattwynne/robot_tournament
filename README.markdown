@@ -10,7 +10,7 @@ That starts the tournament engine, where you can host battles between rival team
   * zip file contains a single folder in the root from which the robot will take it's name
   * the folder contains an executable file, 'move' which will be called by the tournament engine when the robot needs to make a move
 
-See the features for examples.
+See the features for examples, or the folder 'examples'
 
 Use the following command to create and start a tournament:
 
