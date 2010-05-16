@@ -2,8 +2,8 @@ require 'player'
 
 class Players
   def initialize(paths, reporter)
-    @players = paths.zip(['o', 'x']).map do |path, symbol| 
-      player = Player.new(path, symbol)
+    @players = paths.zip(['0', 'x']).map do |path, symbol| 
+      Player.new(path, symbol)
     end
     
     @players.each { |player| player.report_to(reporter) }

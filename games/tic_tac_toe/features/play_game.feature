@@ -11,8 +11,8 @@ Feature: Play game
       """
       #!/usr/bin/env ruby
       board = ARGV[0]
-      my_symbol = "x" if board.count("o") > board.count("x")
-      my_symbol ||= "o"
+      my_symbol = "x" if board.count("0") > board.count("x")
+      my_symbol ||= "0"
 
       # have I been yet?
       if board.index(my_symbol).nil?
@@ -31,8 +31,8 @@ Feature: Play game
       # x--
       # x-x
       moves = [1,3,6,8]
-      my_symbol = "x" if board.count("o") > board.count("x")
-      my_symbol ||= "o"
+      my_symbol = "x" if board.count("0") > board.count("x")
+      my_symbol ||= "0"
 
       puts moves[board.count(my_symbol).to_i]
       """
@@ -41,19 +41,19 @@ Feature: Play game
     When a game is played between "downwards" and "next_free_space"
     Then I should see exactly:
       """
-      player o: 'downwards'
+      player 0: 'downwards'
       player x: 'next_free_space'
       ---------
-      o move: 0
-      o--------
+      0 move: 0
+      0--------
       x move: 1
-      ox-------
-      o move: 3
-      ox-o-----
+      0x-------
+      0 move: 3
+      0x-0-----
       x move: 2
-      oxxo-----
-      o move: 6
-      oxxo--o--
+      0xx0-----
+      0 move: 6
+      0xx0--0--
       Result: downwards wins
       
       """
@@ -62,27 +62,27 @@ Feature: Play game
     When a game is played between "next_free_space" and "blocker"
     Then I should see exactly:
       """
-      player o: 'next_free_space'
+      player 0: 'next_free_space'
       player x: 'blocker'
       ---------
-      o move: 0
-      o--------
+      0 move: 0
+      0--------
       x move: 1
-      ox-------
-      o move: 2
-      oxo------
+      0x-------
+      0 move: 2
+      0x0------
       x move: 3
-      oxox-----
-      o move: 4
-      oxoxo----
+      0x0x-----
+      0 move: 4
+      0x0x0----
       x move: 6
-      oxoxo-x--
-      o move: 5
-      oxoxoox--
+      0x0x0-x--
+      0 move: 5
+      0x0x00x--
       x move: 8
-      oxoxoox-x
-      o move: 7
-      oxoxooxox
+      0x0x00x-x
+      0 move: 7
+      0x0x00x0x
       Result: draw
       
       """
@@ -91,14 +91,14 @@ Feature: Play game
     When a game is played between "blocker" and "blocker"
     Then I should see exactly:
       """
-      player o: 'blocker'
+      player 0: 'blocker'
       player x: 'blocker'
       ---------
-      o move: 1
-      -o-------
+      0 move: 1
+      -0-------
       x move: 1
       FOUL! player x has attempted to play on an already-taken space and loses by default
-      -o-------
+      -0-------
       Result: blocker wins
       
       """
@@ -113,11 +113,11 @@ Feature: Play game
     When a game is played between "mistaken" and "blocker"
     Then I should see exactly:
       """
-      player o: 'mistaken'
+      player 0: 'mistaken'
       player x: 'blocker'
       ---------
-      o move: 99 flake
-      FOUL! player o has attempted to play an illegal move and loses by default
+      0 move: 99 flake
+      FOUL! player 0 has attempted to play an illegal move and loses by default
       ---------
       Result: blocker wins
       
@@ -134,11 +134,11 @@ Feature: Play game
     When a game is played between "buggy" and "blocker"
     Then I should see exactly:
       """
-      player o: 'buggy'
+      player 0: 'buggy'
       player x: 'blocker'
       ---------
-      o move: this is my exception
-      FOUL! player o has returned a non-zero exit status and loses by default
+      0 move: this is my exception
+      FOUL! player 0 has returned a non-zero exit status and loses by default
       ---------
       Result: blocker wins
     
@@ -155,11 +155,11 @@ Feature: Play game
     When a game is played between "crap" and "blocker"
     Then I should see exactly:
       """
-      player o: 'crap'
+      player 0: 'crap'
       player x: 'blocker'
       ---------
-      o move: this is my weak error handling
-      FOUL! player o has returned a non-zero exit status and loses by default
+      0 move: this is my weak error handling
+      FOUL! player 0 has returned a non-zero exit status and loses by default
       ---------
       Result: blocker wins
   
@@ -176,14 +176,14 @@ Feature: Play game
     When a game is played between "blocker" and "slow"
     Then I should see exactly:
       """
-      player o: 'blocker'
+      player 0: 'blocker'
       player x: 'slow'
       ---------
-      o move: 1
-      -o-------
+      0 move: 1
+      -0-------
       x move: 
-      FOUL! player x has taken more than 1.0 second(s) to move and loses by default
-      -o-------
+      FOUL! player x has taken more than 1.0 second(s) t0 move and loses by default
+      -0-------
       Result: o wins
     
       """

@@ -101,7 +101,7 @@ class Board
   end
   
   def opposide_of(symbol)
-    return 'x' if symbol == 'o'
-    'o'
+    return 'x' if symbol == '0'
+    '0'
   end
 end

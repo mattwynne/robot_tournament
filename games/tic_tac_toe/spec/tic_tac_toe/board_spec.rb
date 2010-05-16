@@ -5,7 +5,7 @@ describe Board do
   let(:players) do
     {
       'x' => mock('player', :name => 'player one'),
-      'o' => mock('player', :name => 'player two')
+      '0' => mock('player', :name => 'player two')
     }
   end
   let(:game) { mock(Game).as_null_object }
@@ -21,7 +21,7 @@ describe Board do
     
     context "when the board is full but there is no winner" do
       it "reports a draw" do
-        game.should_receive(:draw).with('xyxxyyyxx')
+        game.should_receive(:draw).with('x0xx000xx')
         # xyx
         # xyy
         # yxx
@@ -29,7 +29,7 @@ describe Board do
           subject.move!(move, 'x')
         end
         [1,4,5,6].each do |move|
-          subject.move!(move, 'y')
+          subject.move!(move, '0')
         end
       end
     end
