@@ -31,6 +31,9 @@ class TournamentPresenter
   
   def duration_until_next_round
     return nil unless next_round
+    if seconds_until_next_round < 0
+      @tournament.kick
+    end
     ChronicDuration.output(seconds_until_next_round, :format => :long)
   end
   
