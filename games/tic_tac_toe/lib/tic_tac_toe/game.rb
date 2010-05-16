@@ -5,9 +5,10 @@ class Game
   # 345
   # 678
 
-  def initialize(players)
+  def initialize(players, opts)
     @players = players
     @current_player = @players.first
+    Player.max_move_secs = opts[:timeout] if opts[:timeout]
   end
   
   def play(reporter)

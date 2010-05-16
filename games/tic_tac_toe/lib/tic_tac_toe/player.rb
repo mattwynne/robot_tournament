@@ -1,5 +1,10 @@
 require 'tempfile'
 class Player
+  class << self
+    attr_accessor :max_move_secs
+  end
+  max_move_secs = 1
+  
   attr_reader :symbol
   def initialize(path, symbol)
     @path = path
@@ -21,26 +26,13 @@ class Player
     stderr = IO.read(stderr_file.path)
     
     if $?.exitstatus == 0
-      handle_good_move(stdout, reporter, board)
+      board.move!(stdout, @symbol)
     else
-      handle_bad_move(stdout + stderr, reporter, board)
+      board.loser!(stdout + stderr, @symbol, "returned a non-zero exit status")
     end
   end
 
   def name
     File.basename(@path)
   end
-  
-  private
-  
-  def handle_good_move(move, reporter, board)
-    reporter.move(move, @symbol)
-    board.move!(move, @symbol)
-  end
-  
-  def handle_bad_move(message, reporter, board)
-    reporter.move(message, @symbol)
-    board.loser!(@symbol, "returned a non-zero exit status")
-  end
-  
 end

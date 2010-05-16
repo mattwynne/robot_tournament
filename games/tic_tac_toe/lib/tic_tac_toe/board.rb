@@ -11,25 +11,27 @@ class Board
     @grid.join
   end
   
-  def loser!(symbol, reason)
+  def loser!(move, symbol, reason)
     @loser = symbol
+    @observer.move(move, symbol)
     @observer.foul(symbol, reason)
     report_any_result
   end
 
   def move!(move, symbol)
     if illegal?(move)
-      loser!(symbol, "attempted to play an illegal move")
+      loser!(move, symbol, "attempted to play an illegal move")
       return
     end
     
     move = move.to_i
     
     if already_occupied?(move)
-      loser!(symbol, "attempted to play on an already-taken space")
+      loser!(move, symbol, "attempted to play on an already-taken space")
       return
     end
     
+    @observer.move(move, symbol)
     @grid[move] = symbol
     report_any_result
   end

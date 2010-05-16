@@ -166,7 +166,7 @@ Feature: Play game
       """
   
   Scenario: Player takes too long to make a move
-    Given the maximum seconds allowed for a move is 1.0
+    Given the maximum seconds allowed for a move is "1.0"
     And a player "slow" who moves like this:
       """
       #!/usr/bin/env ruby
