@@ -1,14 +1,20 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Board do
-  
+
+  let(:players) do
+    {
+      'x' => mock('player', :name => 'player one'),
+      'o' => mock('player', :name => 'player two')
+    }
+  end
   let(:game) { mock(Game).as_null_object }
-  subject    { Board.new(game) }
+  subject    { Board.new(game, players) }
   
   describe "#move!" do
     context "when the board has a completed line on it" do
       it "should report the winner" do
-        game.should_receive(:winner).with('x', 'xxx------')
+        game.should_receive(:winner).with('player one', 'xxx------')
         [0,1,2].each { |move| subject.move!(move, 'x') }
       end
     end
@@ -36,7 +42,7 @@ describe Board do
       end
       
       it "signals that the other player has won" do
-        game.should_receive(:winner).with('o', 'x--------')
+        game.should_receive(:winner).with('player two', 'x--------')
         subject.move!(0, 'x')
         subject.move!(0, 'x')
       end
