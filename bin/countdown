@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/robot_tournament'
+
+countdown_theme = File.dirname(__FILE__) + '/../sounds/countdown_theme.mp3'
+
+while (tournament = Tournament.current)
+  if round = tournament.next_round
+    left = round.start_time - Time.now
+    if left < 30 && left > 0
+      `open #{countdown_theme}`
+      sleep 30
+    end
+  end
+  sleep 1
+end
