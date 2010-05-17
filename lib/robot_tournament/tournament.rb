@@ -31,6 +31,7 @@ class Tournament
   end
   
   def store_player_upload(upload)
+    return unless next_round
     next_round.store_player_upload(upload)
   end
   

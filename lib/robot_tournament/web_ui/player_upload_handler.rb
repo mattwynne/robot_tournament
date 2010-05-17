@@ -1,7 +1,11 @@
 require 'robot_tournament/player_upload'
 require 'robot_tournament/validation_error'
 
-class NoCurrentTournament < StandardError; end
+class NoCurrentTournament < StandardError
+  def initialize
+    super("Player upload failed: There is no tournament in progress at the moment.")
+  end
+end
 
 class PlayerUploadHandler
   def initialize(raw)
@@ -9,10 +13,10 @@ class PlayerUploadHandler
   end
   
   def process
-    raise(NoCurrentTournament) unless tournament
+    raise(NoCurrentTournament) unless tournament && tournament.next_round
 
     unless @upload.valid?
-      raise(ValidationError, @upload.validation_error_message)
+      raise(ValidationError, "Player upload failed: #{@upload.validation_error_message}")
     end
     
     player = tournament.store_player_upload(@upload)
