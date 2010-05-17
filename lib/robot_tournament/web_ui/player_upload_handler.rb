@@ -20,7 +20,7 @@ class PlayerUploadHandler
     end
     
     player = tournament.store_player_upload(@upload)
-    return "Received new player '#{player.name}' OK\n"
+    return "Player '#{player.name}' added to #{tournament.next_round} OK\n"
   end
   
   private

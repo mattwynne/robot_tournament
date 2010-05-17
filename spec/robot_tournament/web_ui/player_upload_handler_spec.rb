@@ -6,7 +6,8 @@ describe PlayerUploadHandler do
   let(:raw_data)         { mock('raw_data') }
   let(:player_upload)    { mock(PlayerUpload, :valid? => true) }
   let(:player)           { mock(Player, :name => 'foo' )}
-  let(:tournament)       { mock(Tournament, :store_player_upload => player) }
+  let(:round)            { mock(Round, :to_s => "Round 1")}
+  let(:tournament)       { mock(Tournament, :store_player_upload => player, :next_round => round) }
   let(:tournament_store) { mock(TournamentStore, :current => tournament) }
   
   subject { PlayerUploadHandler.new(raw_data) }

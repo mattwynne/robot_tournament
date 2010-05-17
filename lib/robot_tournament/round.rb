@@ -16,6 +16,10 @@ class Round
     "Round #{num[1]}"
   end
   
+  def to_s
+    name
+  end
+  
   def kick
     start! if due?
   end
