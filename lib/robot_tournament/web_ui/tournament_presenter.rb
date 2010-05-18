@@ -69,7 +69,7 @@ class TournamentPresenter
   end
   
   def finished_rounds
-    rounds.select { |round| round.finished? }
+    rounds.select { |round| round.finished? }.reverse
   end
   
   def finished?
