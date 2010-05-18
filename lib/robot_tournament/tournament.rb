@@ -46,7 +46,7 @@ class Tournament
   
   def rounds
     path = @path + '/round_*'
-    Dir[path].sort.map { |path| Round.new(path) }
+    Dir[path].map { |path| Round.new(path) }.sort
   end
   
   private

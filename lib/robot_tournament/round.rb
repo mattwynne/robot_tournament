@@ -11,9 +11,17 @@ class Round
   end
   
   def name
+    "Round #{number}"
+  end
+  
+  def <=>(other)
+    number <=> other.number
+  end
+  
+  def number
     raw_name = File.basename(@path)
     num = /^round_(\d+)$/.match(raw_name)
-    "Round #{num[1]}"
+    num[1]
   end
   
   def to_s
