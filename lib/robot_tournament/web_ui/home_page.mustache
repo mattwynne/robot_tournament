@@ -11,6 +11,10 @@
         padding: 2px;
       }
       
+      .big {
+        font-size: 2em;
+      }
+      
       .match {
         margin-left: 10px;
         border: 4px dashed #aaa;
@@ -69,7 +73,7 @@
         {{/winner?}}
         <h2>Next Round</h2>
         <p>
-          {{next_round_name}} (of {{total_rounds_count}}) begins in {{duration_until_next_round}}.
+          {{next_round_name}} (of {{total_rounds_count}}) begins in <span class="big">{{duration_until_next_round}}</span>.
         </p>
       
         <h3>Players</h3>

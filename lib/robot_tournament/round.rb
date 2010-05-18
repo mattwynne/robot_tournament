@@ -21,7 +21,7 @@ class Round
   def number
     raw_name = File.basename(@path)
     num = /^round_(\d+)$/.match(raw_name)
-    num[1]
+    num[1].to_i
   end
   
   def to_s
