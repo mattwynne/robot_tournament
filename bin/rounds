@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/robot_tournament'
+require 'rubygems'
+require 'trollop'
+
+Trollop::options
+Trollop::die("No current tournament") unless Tournament.current
+Tournament.current.rounds.each do |round|
+  p [round.number, round.finished? ? 'finished' : '']
+end

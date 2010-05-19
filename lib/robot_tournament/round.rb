@@ -28,8 +28,8 @@ class Round
     name
   end
   
-  def kick
-    start! if due?
+  def kick(&block)
+    start!(&block) if due?
   end
   
   def started?
@@ -86,9 +86,9 @@ class Round
     @start_time < Time.now
   end
   
-  def start!
+  def start!(&block)
     FileUtils.touch(@path + '/started')
-    RoundRunner.new(player_store, Game.new(@game), self).start!
+    RoundRunner.new(player_store, Game.new(@game), self).start!(&block)
   end
   
   def player_store

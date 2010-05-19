@@ -5,9 +5,12 @@ class RoundRunner
     @player_store, @game, @observer = player_store, game, observer
   end
   
-  def start!
+  def start!(&block)
     results = []
+    total_matches = players.count * players.count - players.count
+    count = 1
     each_pair do |player1, player2|
+      block.call(player1, player2, count, total_matches) if block
       winner, output = @game.play(player1, player2)
       winner = winner.name if winner.respond_to?(:name)
       results << {
@@ -16,6 +19,7 @@ class RoundRunner
         "winner"  => winner,
         "output"  => output
       }
+      count += 1
     end
     @observer.results!(results)
     @observer.league_table!(process_results(results))

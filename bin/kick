@@ -5,11 +5,19 @@ require 'trollop'
 
 opts = Trollop::options do
   opt :repeat, "Keep kicking every second until you make me stop", :default => false
+  opt :round, "Kick a particular round", :type => Integer
 end
 
-Tournament.kick
-while opts[:repeat]
-  sleep 1
+if opts[:round]
+  round = Tournament.current.rounds[opts[:round] - 1]
+  round.kick do |player1, player2, num, total|
+    puts "#{player1.name} vs #{player2.name} (#{num}/#{total})"
+  end
+else
   Tournament.kick
-  print "."
+  while opts[:repeat]
+    sleep 1
+    Tournament.kick
+    print "."
+  end
 end
