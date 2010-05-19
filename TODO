@@ -1,5 +1,3 @@
-* automatically roll over players into next round
 * Show something else when tournament is running
-* bin to manually trigger next round now!
-
-* Easier way for windows users to upload
+* easier way to manage the warm-up
+* javascript counter to show time to next round
