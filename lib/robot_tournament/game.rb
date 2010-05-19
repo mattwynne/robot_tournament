@@ -15,10 +15,16 @@ class Game
   
   def play(player1, player2)
     cmd = "#{@game_cmd} #{player1.path} #{player2.path}"
-    stdin, stdout, stderr = Open3.popen3(cmd)
-    raise(BrokenGameEngineError, stderr.read) if $?.exitstatus != 0
     
-    output = stdout.read
+    stderr_file = Tempfile.new('game')
+    stderr_file.close
+
+    stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    stderr = IO.read(stderr_file.path)
+    
+    raise(BrokenGameEngineError, stderr) if $?.exitstatus != 0
+    
+    output = stdout
     match = /Result: (.*) wins/.match(output)
     winner = match ? match[1] : nil
     [winner, output]
