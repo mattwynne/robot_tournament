@@ -4,15 +4,23 @@ def announce(message)
   puts "=" * message.length
 end
 
+def specs
+  sh("spec spec --color")
+end
+
+def features
+  sh("cucumber -f progress")  
+end
+
 task :default do
   announce("Testing Engine")
-  sh("spec spec")
-  sh("cucumber -f progress")
+  specs
+  features
   Dir["#{File.dirname(__FILE__)}/games/*"].each do |game|
     Dir.chdir(game) do
       announce("Testing Game '#{File.basename(game)}'")
-      sh("spec spec")
-      sh("cucumber -f progress")
+      specs
+      features
     end
   end
 end
