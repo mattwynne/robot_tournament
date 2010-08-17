@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts ["rock","paper","scissors"][rand(3)]

@@ -20,6 +20,14 @@ class Tournament
     read_settings!
   end
   
+  def game_name
+    @game
+  end
+  
+  def game_details
+    Game.new(@game).details
+  end
+  
   def start!
     FileUtils.touch(@path + '/started')
     create_rounds

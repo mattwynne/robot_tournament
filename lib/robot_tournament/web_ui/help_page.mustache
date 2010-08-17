@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: Helvetica;
+      }
+      pre {
+        background-color: black;
+        color: white;
+        font-size: 12pt;
+        padding: 2px;
+      }
+      
+      .big {
+        font-size: 2em;
+      }
+      
+      .match {
+        margin-left: 10px;
+        border: 4px dashed #aaa;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #eec;
+      }
+      
+      .match h4 {
+        padding: 2px;
+        margin: 2px;
+        text-decoration: underline;
+      }
+      
+      .winner {
+        font-size: 1.2em;
+        font-weight: bold;
+        background-color: #00FFFF;
+      }
+      
+      h2.round {
+        background-color: #008C00;
+        color: white;
+        padding: 2px;
+      }
+      
+      td,th {
+        background-color: #eec;
+        padding: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Help</h1>
+    <h2>How to Upload Your Player</h2>
+    <p>
+      To register a player for a round of the tournament, you need to upload a .zip file
+      containing the player to the URL {{upload_path}}, using a HTTP post containing the zip file data.
+    </p>
+    <p>The UNIX command <a href="http://curl.haxx.se/download.html">curl</a> is a handy tool for uploading your player. Use a command something like this:</p>
+    <pre>
+      curl {{upload_path}} --data-binary @my-player.zip
+    </pre>
+    
+    <h2>Player Content & Structure</h2>
+    <p>
+      At a minimum, the player zip file must contain:
+    </p>
+    <ul>
+      <li>A folder (the name of which will be used as the player's name)</li>
+      <li>Within that folder, a file called <b>move</b></li>
+    </ul>
+    <p>
+      Use the <b>zip</b> command-line program something like this:
+    </p>
+    <pre>
+      zip -r my-player.zip ./my-player
+    </pre>
+    <h3>How it Works</h3>
+    <p>
+      When your player is uploaded to the tournament engine, the zip file is unpacked and your <b>move</b> file is made executable so that it can be run as a script. When the tournament round needs your player to make a move, that <b>move</b> script will be run. Depending on the <a href="/game">current game</a>, it may be passed arguments on the command-line, or STDIN data. It will be expected to respond to STDOUT, as specified by the protocol for the game being played.
+    </p>
+    <p>
+      Your <b>move</b> file should start with a <a href="http://en.wikipedia.org/wiki/Interpreter_directive">Shebang</a> so that the tournament engine knows which script interpreter to use when running it.</a>
+    </p>
+    <h2>But My Player is Written in Java/.NET</h2>
+    <p>
+      Write your <b>move</b> script as a simple bash (or other scripting language) wrapper that calls the java program, and then just include the java program in the zip file. Remember to pass through the command-line arguments from the wrapper script into the java.
+    </p>
+  </body>
+</html>

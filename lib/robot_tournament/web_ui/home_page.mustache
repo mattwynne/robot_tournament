@@ -46,11 +46,37 @@
         padding: 2px;
       }
     </style>
+    <script 
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js">
+    </script>
+    <script type = "text/javascript">
+      $(document).ready(function()
+        {
+          var autoRefreshSecs = setInterval(function() {
+            $('#secs').load('/secs').fadeIn("slow");
+          }, 1000);
+          
+          var autoRefreshPage = setInterval(function() {
+            $.get('/secs?pure', function(secs) {
+              if (Number(secs) <= 10) {
+                setTimeout(function() { location.reload(); }, 12000);
+              }
+            });
+          }, 1000);
+          
+        }
+      );
+    </script>
   </head>
   <body>
     {{#tournament}}
       {{#finished?}}
-        <h1>Finished Tournament: "{{name}}"</h1>
+        <h1>Finished Tournament: {{name}}</h1>
+        <p>
+          <label for="game">Today's game:</label>
+          <a id="game" href="/game">{{game}}</a>
+        </p>
         <h2>And the winner is... <span class="tournament winner">{{winner}}</span></h2>
         <table id="league">
           <tr><th>Player</th><th>Points</th></tr>
@@ -60,7 +86,11 @@
         </table>
       {{/finished?}}
       {{^finished?}}
-        <h1>Running Tournament: "{{name}}"</h1>
+        <h1>Running Tournament: {{name}}</h1>
+        <p>
+          <label for="game">Today's game:</label>
+          <a id="game" href="/game">{{game}}</a>
+        </p>
         {{#winner?}}
           <p>Current leader: <span class="tournament winner">{{winner}}</span></p>
 
@@ -73,7 +103,7 @@
         {{/winner?}}
         <h2>Next Round</h2>
         <p>
-          {{next_round_name}} (of {{total_rounds_count}}) begins in <span class="big">{{duration_until_next_round}}</span>.
+          {{next_round_name}} (of {{total_rounds_count}}) begins in <span id="secs" class="big">{{duration_until_next_round}}</span>.
         </p>
       
         <h3>Players</h3>
@@ -85,10 +115,7 @@
           <li>There are no players registered for this round yet.</li>
         {{/players}}
         </ul>
-        <p>To register a player, use a command something like this:</p>
-        <pre>
-          curl {{upload_path}} --data-binary @my-player.zip
-        </pre>
+        <a href="help">Need Help Registering a Player?</a>
       {{/finished?}}
       {{#finished_rounds?}}
         <hr/>

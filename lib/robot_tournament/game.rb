@@ -7,10 +7,16 @@ class Game
   end
   
   def initialize(name)
-    @game_cmd = games_path + "/#{name}/bin/#{name}"
+    @path = games_path + "/#{name}"
+    @game_cmd = "#{@path}/bin/#{name}"
+    
     unless File.exists?(@game_cmd)
       raise(ArgumentError, "Game '#{name}' not found in #{games_path}")
     end
+  end
+  
+  def details
+    File.read("#{@path}/readme.markdown")
   end
   
   def play(player1, player2)

@@ -8,11 +8,11 @@ class HomePage < Mustache
     @env = env
   end
   
-  def upload_path
-    "#{@env["rack.url_scheme"]}://#{@env["HTTP_HOST"]}/players"
-  end
-  
   def tournament
     TournamentPresenter.new(Tournament.current)
+  end
+  
+  def game
+    Tournament.current.game_name
   end
 end
