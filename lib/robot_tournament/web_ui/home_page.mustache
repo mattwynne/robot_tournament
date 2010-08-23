@@ -60,7 +60,7 @@
           var autoRefreshPage = setInterval(function() {
             $.get('/secs?pure', function(secs) {
               if (Number(secs) <= 10) {
-                setTimeout(function() { location.reload(); }, 12000);
+                setTimeout(function() { location.reload(); }, 15000);
               }
             });
           }, 1000);
