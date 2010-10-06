@@ -14,7 +14,7 @@ Given /^there is a tournament$/ do
 end
 
 Then /^I should see that the Tournament "([^\"]*)" is in progress$/ do |name|
-  page.should have_content(%{Running Tournament: "#{name}"})
+  page.should have_content(%{Running Tournament: #{name}})
 end
 
 Then /^I should see that the first Round will begin in less than 10 minutes$/ do
@@ -37,7 +37,7 @@ When /^the engine is kicked$/ do
 end
 
 Then /^I should see that the tournament has finished$/ do
-  page.should have_content %{Finished Tournament: "#{tournament.name}"}
+  page.should have_content %{Finished Tournament: #{tournament.name}}
 end
 
 Then /^I should see that 2 rounds were played$/ do
