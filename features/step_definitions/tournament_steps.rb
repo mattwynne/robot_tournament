@@ -45,10 +45,10 @@ Then /^I should see that 2 rounds were played$/ do
 end
 
 Then /^I should see that 2 matches were played in each round$/ do
-  finished_rounds = page.all("//*[@class='finished round']")
-  finished_rounds.length.should == 2
+  finished_rounds = page.all("//*[@class='finished round']").reverse
   finished_rounds.each do |round|
-    round.all("//*[@class='match']").length.should == 2
+    visit round.find(:xpath, 'a')['href']
+    page.all("//*[@class='match']").length.should == 2
   end
 end
 

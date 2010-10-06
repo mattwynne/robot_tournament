@@ -12,6 +12,8 @@ Feature: Finish tournament
     And a player "always-paper" who always says "paper"
     When 10 minutes pass
     And the engine is kicked
+    And a player "always-rock" who always says "rock"
+    And a player "always-paper" who always says "paper"
     And 11 minutes pass
     And the engine is kicked
     And I go to the homepage

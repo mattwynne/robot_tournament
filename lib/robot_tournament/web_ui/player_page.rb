@@ -1,4 +1,5 @@
 require 'mustache'
+require 'robot_tournament/web_ui/tournament_presenter'
 
 class PlayerPage < Mustache
   self.template_path = File.dirname(__FILE__)

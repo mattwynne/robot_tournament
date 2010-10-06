@@ -2,10 +2,9 @@ require 'rubygems'
 require 'sinatra'
 require 'robot_tournament/player_upload'
 require 'robot_tournament/web_ui/player_upload_handler'
-require 'robot_tournament/web_ui/home_page'
-require 'robot_tournament/web_ui/game_page'
-require 'robot_tournament/web_ui/help_page'
-require 'robot_tournament/web_ui/player_page'
+[:home, :game, :help, :player, :round].each do |page_name|
+  require "robot_tournament/web_ui/#{page_name}_page"
+end
 
 set :raise_errors, true if ENV['RACK_ENV'] == 'cucumber'
 set :show_exceptions, false
@@ -21,6 +20,10 @@ end
 
 get '/players/:name' do |player_name|
   PlayerPage.new(player_name).render
+end
+
+get '/rounds/:number' do |round_number|
+  RoundPage.new(round_number.to_i).render
 end
 
 get '/' do

@@ -1,7 +1,7 @@
-Feature: Examine a player
-  In order to figure out how my player is doing against other players
+Feature: Examine a round
+  In order to see what happened in a particular round
   As a competitor
-  I want to examine exactly how my player has done in each match
+  I want a special page for each round, showing me what happened
   
   Background:
     Given a Tournament "foo" with the following attributes:
@@ -12,8 +12,8 @@ Feature: Examine a player
     And a player "friendly" who always says "hello"
     And a player "always-paper" who always says "paper"
     And the first round has been played
-  
-  Scenario: Navigate to the page for the previous round
+    
+  Scenario:
     When I go to the homepage
-    And I follow "always-rock"
-    Then I should see 4 results
+    And I follow "Round 1"
+    Then I should see 6 results
