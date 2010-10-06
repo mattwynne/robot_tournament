@@ -1,3 +1,21 @@
 * Show something else when tournament is running
 * easier way to manage the warm-up
 * javascript counter to show time to next round
+
+More logging and visibility of exactly what’s going on when a player runs would be useful to help participants with debugging. It was hard for people to see what was going on when they were getting their robots running. More visibility how exactly what it looks like when their program is run on the server environment would be helpful.
+
+Also more functionality on the UI to slice the results and look at just how your own robot had performed.
+
+The warm-up should include calling a robot with a command-line argument so that any teething problems with reading the input can be resolved at a relaxed pace.
+
+A better explanation (role play?) of how the tournament works would help.
+
+The problem was so small that tests were hardly needed. Pivoting, changing the rules of the game half-way through the tournament might have helped here.
+
+People enjoyed the fact that the goal – getting points – was clear, so that rather than it being about writing clean code or writing tests, it was more realistic to a business context.
+
+Trying a more open game where you could learn more about your opponent might be interesting
+
+Getting teams to swap code might also be interesting
+
+Doing a code show & tell wasn’t in my plan but worked really well
