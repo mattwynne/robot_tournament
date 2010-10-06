@@ -29,7 +29,7 @@ Then the command-line argument passed to your player will be:
 
     x0x-0----
 
-Based on the state of the board, and the knowledge that 0 goes first, you need to work out which player you are, and respond with a move. In the example above, it must be 0's turn, so respond like this to win:
+Based on the state of the board, *and the knowledge that 0 goes first*, you need to work out which player you are, and respond with a move. In the example above, it must be 0's turn, so respond like this to win:
 
     7
 

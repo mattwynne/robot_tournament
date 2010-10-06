@@ -10,7 +10,7 @@ This playground game involves two players simultaneously choosing one of the thr
 
 ## Protocol
 
-When asked to move, your robot should respond with one of the following strings:
+When asked to move, your robot should respond with one of the following strings to the standard out:
 
     rock
 or
@@ -18,4 +18,4 @@ or
 or
     scissors
 
-That's it. There's no opportunity to learn about your opponent as your program will not remember anything when it's next called. That makes this game really quite stupid, and serves no other purpose than a fun way to warm up and make sure you can build and upload a robot to the tournament.
+That's it. There's no opportunity to learn about your opponent as your program will not remember anything when it's next called. That makes this game really quite silly, and serves no other purpose than a fun way to warm up and make sure you can build and upload a robot to the tournament.
