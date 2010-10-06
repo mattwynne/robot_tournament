@@ -1,4 +1,4 @@
-source :gemcutter
+source :rubygems
 gem "sinatra"
 gem "rubyzip"
 gem "mustache"
@@ -6,3 +6,10 @@ gem "rack-test"
 gem "aruba"
 gem "rspec"
 gem "json"
+gem "cucumber"
+gem "capybara"
+gem "thin"
+gem "chronic_duration"
+gem "rdiscount"
+gem "cucumber-rails"
+gem "trollop"
