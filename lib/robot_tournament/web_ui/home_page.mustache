@@ -81,7 +81,12 @@
         <table id="league">
           <tr><th>Player</th><th>Points</th></tr>
           {{#league_table}}
-          <tr><td>{{player}}</td><td>{{points}}</td></tr>
+          <tr>
+            <td>
+              <a href="/players/{{player}}">{{player}}</a>
+            </td>
+            <td>{{points}}</td>
+          </tr>
           {{/league_table}}
         </table>
       {{/finished?}}
@@ -97,7 +102,10 @@
           <table id="league">
             <tr><th>Player</th><th>Points</th></tr>
             {{#league_table}}
-            <tr><td>{{player}}</td><td>{{points}}</td></tr>
+            <tr>
+              <td><a href="/players/{{player}}">{{player}}</a></td>
+              <td>{{points}}</td>
+            </tr>
             {{/league_table}}
           </table>
         {{/winner?}}
@@ -109,7 +117,7 @@
         <h3>Players</h3>
         <ul>
         {{#players}}
-          <li>{{name}}</li>
+          <li><a href="/players/{{name}}">{{name}}</a></li>
         {{/players}}
         {{^players}}
           <li>There are no players registered for this round yet.</li>

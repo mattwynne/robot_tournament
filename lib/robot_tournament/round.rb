@@ -52,6 +52,13 @@ class Round
     read_json(:results)
   end
   
+  def results_for_player(player_name)
+    results.select do |result|
+      player_names = [result['player1'], result['player2']]
+      player_names.include?(player_name)
+    end
+  end
+  
   def results!(results)
     write_json(:results, results)
   end
