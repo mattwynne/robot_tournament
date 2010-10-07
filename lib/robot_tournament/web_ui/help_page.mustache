@@ -82,7 +82,18 @@
     </p>
     <h2>But My Player is Written in Java/.NET</h2>
     <p>
-      Write your <b>move</b> script as a simple bash (or other scripting language) wrapper that calls the java program, and then just include the java program in the zip file. Remember to pass through the command-line arguments from the wrapper script into the java.
+      Write your <b>move</b> script as a simple bash (or other scripting language) wrapper that calls the java program, and then just include the java program in the zip file.
     </p>
+    <p>
+      The working directory will be set to the directory containing your move file, so you can assume that when working with paths.
+    </p>
+    <p><b>Important:</b>Remember to pass through the command-line arguments from the wrapper script to the java executable.
+    </p>
+    <h2>Examples</h2>
+    <ul>
+      <li><a href="examples/always-paper-haskell.zip">always-paper-haskell.zip</a></li>
+      <li><a href="examples/always-rock.zip">always-rock.zip (Ruby)</a></li>
+      <li><a href="examples/always-random.zip">always-random.zip (Ruby)</a></li>
+    </ul>
   </body>
 </html>
