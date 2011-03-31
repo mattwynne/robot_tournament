@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'bundler'
+Bundler.require
+
 ENV['RACK_ENV'] ||= 'cucumber'
 
 require File.dirname(__FILE__) + '/../../lib/robot_tournament'
