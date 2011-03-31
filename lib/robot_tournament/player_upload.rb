@@ -37,7 +37,7 @@ class PlayerUpload
   def unpack
     raise(ValidationError, validation_error_message) unless valid?
     FileUtils.rm_rf player_name
-    `unzip #{zip_file.path}`
+    `unzip -o #{zip_file.path}`
   end
   
   def player_name

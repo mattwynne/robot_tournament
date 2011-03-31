@@ -50,24 +50,6 @@
       type="text/javascript"
       src="js/jquery.min.js">
     </script>
-    <script type = "text/javascript">
-      $(document).ready(function()
-        {
-          var autoRefreshSecs = setInterval(function() {
-            $('#secs').load('/secs').fadeIn("slow");
-          }, 1000);
-          
-          var autoRefreshPage = setInterval(function() {
-            $.get('/secs?pure', function(secs) {
-              if (Number(secs) <= 10) {
-                setTimeout(function() { location.reload(); }, 15000);
-              }
-            });
-          }, 1000);
-          
-        }
-      );
-    </script>
   </head>
   <body>
     {{#tournament}}

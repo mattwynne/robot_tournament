@@ -8,17 +8,17 @@ class RoundRunner
   def start!
     results = []
     total_matches = players.count * players.count - players.count
-    count = 1
     each_pair do |player1, player2|
-      winner, output = @game.play(player1, player2)
-      winner = winner.name if winner.respond_to?(:name)
-      results << {
-        "player1" => player1.name,
-        "player2" => player2.name,
-        "winner"  => winner,
-        "output"  => output
-      }
-      count += 1
+      puts "Playing #{player1.name} vs #{player2.name}"
+      
+        winner, output = @game.play(player1, player2)
+        winner = winner.name if winner.respond_to?(:name)
+        results << {
+          "player1" => player1.name,
+          "player2" => player2.name,
+          "winner"  => winner,
+          "output"  => output
+        }
     end
     @observer.results!(results)
     @observer.league_table!(process_results(results))
