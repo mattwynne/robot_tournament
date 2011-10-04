@@ -20,7 +20,8 @@ The idea is to practice and encourage the XP principle of 'release early, releas
 
 # People Who've Run This Session
 
-* This session was first run at the [Software Craftsmanship 2010 conference.](http://sc2010subs.wordpress.com/2010/08/17/robot-tournament-matt-wynne/)
+* This session was first run at the [SPA 2010 conference](http://www.spaconference.org/spa2010/sessions/session275.html)
+* Then at the [Software Craftsmanship 2010 conference.](http://sc2010subs.wordpress.com/2010/08/17/robot-tournament-matt-wynne/)
 * http://blog.dalethatcher.com/2011/10/london-clojure-dojo-robot-tournament.html
 
 If you run a session, please send a pull request with a link to a write-up.
