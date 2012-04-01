@@ -1,5 +1,15 @@
 # Robot Tournament
 
+Robot Tournament is easist to install and run with Ruby Version Manager (RVM)..
+Please Install RVM if you don't already have it.
+    See http://beginrescueend.com/rvm/install/
+
+Create and use the 'robot_tournament' gemset
+    rvm --create gemset use robot_tournament
+
+Install the bundle
+    bundle install
+    
 Start the server like this:
 
     ./bin/server
