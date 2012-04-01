@@ -7,6 +7,9 @@ Please Install RVM if you don't already have it.
 Create and use the 'robot_tournament' gemset
     rvm --create gemset use robot_tournament
 
+Install Bundler
+    gem install bundler
+
 Install the bundle
     bundle install
     
