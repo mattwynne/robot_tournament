@@ -5,12 +5,15 @@ Please Install RVM if you don't already have it.
     See http://beginrescueend.com/rvm/install/
 
 Create and use the 'robot_tournament' gemset
+
     rvm --create gemset use robot_tournament
 
 Install Bundler
+
     gem install bundler
 
 Install the bundle
+
     bundle install
     
 Start the server like this:
@@ -38,3 +41,4 @@ The idea is to practice and encourage the XP principle of 'release early, releas
 * http://blog.dalethatcher.com/2011/10/london-clojure-dojo-robot-tournament.html
 
 If you run a session, please send a pull request with a link to a write-up.
+
