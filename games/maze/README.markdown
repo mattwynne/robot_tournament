@@ -31,8 +31,8 @@ Based on the state of the board, and the header which states which player you ar
 
 # Rules
 
-* The size and format of the board cannot be assumed to be fixed and could change each game.
-* The Minotaur will move one square each turn.
+* The size and layout of the maze cannot be assumed to be fixed and could change each game (but will not change during a single game).
+* The Minotaur will move one square each turn in a random direction.
 * If you make a move into a wall, or don't respond with N, S, E or W, you forfeit the game.
 * If you move onto the Minotaur, or it moves onto you, you forfeit.
 * If you move onto the F square first, you win. If you both move onto the F square in the same turn, then the game is a draw.
