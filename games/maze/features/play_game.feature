@@ -184,3 +184,6 @@ Feature: Play game
       FOUL! player x has taken longer than 1.0 second(s) to move and loses by default
       Result: always-east wins
       """
+
+  Scenario: Successful pathfinding
+    Given this hasn't been written yet: we need a bot
