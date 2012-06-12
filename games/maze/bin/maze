@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/maze'
+require 'rubygems'
+require 'trollop'
+
+opts = Trollop::options do
+  opt :timeout, "Number of seconds to wait for a player", :type => :float
+end
+
+unless ARGV.length == 2
+  Trollop::die("Syntax: maze path/to/player1 path/to/player2 [options]")
+end
+
+paths = ARGV.shift(2)
+reporter = StdoutReporter.new
+players = Players.new(paths, reporter)
+game = Game.new(players, opts)
+game.play(reporter)
