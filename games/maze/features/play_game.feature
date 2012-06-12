@@ -133,7 +133,7 @@ Feature: Play game
       *.........*
       ***********
       1 move: 99 flake
-      FOUL! player 0 has attempted to play an illegal move and loses by default
+      FOUL! player 1 has attempted to play an illegal move and loses by default
       Result: blocker wins
       """
   Scenario: Player dies and throws an exception to STDERR
@@ -159,7 +159,7 @@ Feature: Play game
       FOUL! player 1 has returned a non-zero exit status and loses by default
       ---------
       Result: always-east wins
-    
+
       """
   Scenario: Player takes too long to make a move
     Given the maximum seconds allowed for a move is "1.0"
@@ -169,7 +169,7 @@ Feature: Play game
       sleep 1
 
       """
-    When a game is played between "blocker" and "slow"
+    When a game is played between "slow" and "always-east"
     Then I should see exactly:
       """
       player 1: 'slow'
@@ -180,7 +180,7 @@ Feature: Play game
       3...***...F
       *.........*
       ***********
-      1 move: 
+      1 move:
       FOUL! player x has taken longer than 1.0 second(s) to move and loses by default
       Result: always-east wins
       """
