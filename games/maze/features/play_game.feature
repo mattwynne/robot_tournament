@@ -52,7 +52,7 @@ Feature: Play game
       You are player 2
       ***********
       *......M..*
-      3...***...F
+      21..***...F
       *.........*
       ***********
       2 move: E
@@ -66,7 +66,7 @@ Feature: Play game
       You are player 2
       ***********
       *......M..*
-      .3..***...F
+      .21.***...F
       *.........*
       ***********
       2 move: E
@@ -80,7 +80,7 @@ Feature: Play game
       You are player 2
       ***********
       *......M..*
-      ..3.***...F
+      ..21***...F
       *.........*
       ***********
       2 move: E
@@ -91,27 +91,6 @@ Feature: Play game
       *.........*
       ***********
       1 move: E
-      You are player 2
-      ***********
-      *......M..*
-      ...3***...F
-      *.........*
-      ***********
-      2 move: E
-      You are player 1
-      ***********
-      *......M..*
-      ...3***...F
-      *.........*
-      ***********
-      1 move: E
-      You are player 2
-      ***********
-      *......M..*
-      ...3***...F
-      *.........*
-      ***********
-      2 move: E
       Result: draw
       """
   Scenario: Player makes an illegal move

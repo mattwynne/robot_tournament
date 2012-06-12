@@ -3,9 +3,9 @@
 Imagine a maze
 
     ***********
-    *......M..*
-    3...***...F
-    *.........*
+    *.1....M..*
+    ....***...F
+    *2........*
     ***********
 
 You need to navigate to the (F), avoiding the Minotaur (M). The '.' represent open space, and the '\*' squares are walls.
