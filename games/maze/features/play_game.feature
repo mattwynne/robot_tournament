@@ -1,108 +1,119 @@
 Feature: Play game
 
   Background:
-    Given a player "next_free_space" who moves like this:
+    Given a player "always-east" who moves like this:
       """
       #!/usr/bin/env ruby
       board_state = ARGV[0]
-      puts board_state.index("-")
+      puts "E"
       """
-    And a player "downwards" who moves like this:
-      """
-      #!/usr/bin/env ruby
-      board = ARGV[0]
-      my_symbol = "x" if board.count("0") > board.count("x")
-      my_symbol ||= "0"
-
-      # have I been yet?
-      if board.index(my_symbol).nil?
-        # go in first free square
-        puts board.index("-")
-      else
-        puts(board.rindex(my_symbol) + 3)
-      end
-      """
-    And a player "blocker" who moves like this:
+    And a player "always-south" who moves like this:
       """
       #!/usr/bin/env ruby
-      board = ARGV[0]
-      
-      # -x-
-      # x--
-      # x-x
-      moves = [1,3,6,8]
-      my_symbol = "x" if board.count("0") > board.count("x")
-      my_symbol ||= "0"
-
-      puts moves[board.count(my_symbol).to_i]
+      board_state = ARGV[0]
+      puts "S"
       """
-  
   Scenario: Player 1 wins
-    When a game is played between "downwards" and "next_free_space"
+    When a game is played between "always-east" and "always-south"
     Then I should see exactly:
       """
-      player 0: 'downwards'
-      player x: 'next_free_space'
-      ---------
-      0 move: 0
-      0--------
-      x move: 1
-      0x-------
-      0 move: 3
-      0x-0-----
-      x move: 2
-      0xx0-----
-      0 move: 6
-      0xx0--0--
-      Result: downwards wins
-      
+      player 1: 'always-east'
+      player 2: 'always-south'
+      You are player 1
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      21..***...F
+      *.........*
+      ***********
+      2 move: S
+      Result: always-east wins
       """
 
   Scenario: Draw
-    When a game is played between "next_free_space" and "blocker"
+    When a game is played between "always-east" and "always-east"
     Then I should see exactly:
       """
-      player 0: 'next_free_space'
-      player x: 'blocker'
-      ---------
-      0 move: 0
-      0--------
-      x move: 1
-      0x-------
-      0 move: 2
-      0x0------
-      x move: 3
-      0x0x-----
-      0 move: 4
-      0x0x0----
-      x move: 6
-      0x0x0-x--
-      0 move: 5
-      0x0x00x--
-      x move: 8
-      0x0x00x-x
-      0 move: 7
-      0x0x00x0x
+      player 1: 'always-east'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      2 move: E
+      You are player 1
+      ***********
+      *......M..*
+      .3..***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      .3..***...F
+      *.........*
+      ***********
+      2 move: E
+      You are player 1
+      ***********
+      *......M..*
+      ..3.***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      ..3.***...F
+      *.........*
+      ***********
+      2 move: E
+      You are player 1
+      ***********
+      *......M..*
+      ...3***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      ...3***...F
+      *.........*
+      ***********
+      2 move: E
+      You are player 1
+      ***********
+      *......M..*
+      ...3***...F
+      *.........*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......M..*
+      ...3***...F
+      *.........*
+      ***********
+      2 move: E
       Result: draw
-      
       """
-
-  Scenario: Player attempts to go on already occupied square
-    When a game is played between "blocker" and "blocker"
-    Then I should see exactly:
-      """
-      player 0: 'blocker'
-      player x: 'blocker'
-      ---------
-      0 move: 1
-      -0-------
-      x move: 1
-      FOUL! player x has attempted to play on an already-taken space and loses by default
-      -0-------
-      Result: blocker wins
-      
-      """
-  
   Scenario: Player makes an illegal move
     Given a player "mistaken" who moves like this:
       """
@@ -110,19 +121,21 @@ Feature: Play game
       puts "99 flake"
 
       """
-    When a game is played between "mistaken" and "blocker"
+    When a game is played between "mistaken" and "always-east"
     Then I should see exactly:
       """
       player 0: 'mistaken'
-      player x: 'blocker'
-      ---------
-      0 move: 99 flake
+      player x: 'always-east'
+      You are player 1
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      1 move: 99 flake
       FOUL! player 0 has attempted to play an illegal move and loses by default
-      ---------
       Result: blocker wins
-      
       """
-  
   Scenario: Player dies and throws an exception to STDERR
     Given a player "buggy" who moves like this:
       """
@@ -131,40 +144,23 @@ Feature: Play game
       exit 1
 
       """
-    When a game is played between "buggy" and "blocker"
+    When a game is played between "buggy" and "always-east"
     Then I should see exactly:
       """
-      player 0: 'buggy'
-      player x: 'blocker'
+      player 1: 'buggy'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      1 move: this is my exception
+      FOUL! player 1 has returned a non-zero exit status and loses by default
       ---------
-      0 move: this is my exception
-      FOUL! player 0 has returned a non-zero exit status and loses by default
-      ---------
-      Result: blocker wins
+      Result: always-east wins
     
       """
-  
-  Scenario: Player dies and throws an exception to STDOUT
-    Given a player "crap" who moves like this:
-      """
-      #!/usr/bin/env ruby
-      puts "this is my weak error handling"
-      exit 1
-
-      """
-    When a game is played between "crap" and "blocker"
-    Then I should see exactly:
-      """
-      player 0: 'crap'
-      player x: 'blocker'
-      ---------
-      0 move: this is my weak error handling
-      FOUL! player 0 has returned a non-zero exit status and loses by default
-      ---------
-      Result: blocker wins
-  
-      """
-  
   Scenario: Player takes too long to make a move
     Given the maximum seconds allowed for a move is "1.0"
     And a player "slow" who moves like this:
@@ -176,14 +172,15 @@ Feature: Play game
     When a game is played between "blocker" and "slow"
     Then I should see exactly:
       """
-      player 0: 'blocker'
-      player x: 'slow'
-      ---------
-      0 move: 1
-      -0-------
-      x move: 
+      player 1: 'slow'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *......M..*
+      3...***...F
+      *.........*
+      ***********
+      1 move: 
       FOUL! player x has taken longer than 1.0 second(s) to move and loses by default
-      -0-------
-      Result: blocker wins
-    
+      Result: always-east wins
       """
