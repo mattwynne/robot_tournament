@@ -15,14 +15,28 @@ class Map
   end
 
   def move(player, direction)
-    axis = ['E', 'W'].include?(direction) ? 1 : 0
-    movement = ['N', 'W'].include?(direction) ? -1 : 1
+    new_position = proposed_position(player, direction)
+    @positions[player] = new_position if tile_at(*new_position) == '.'
 
-    new_position = @positions[player].dup
-    new_position[axis] += movement
-
-    @positions[player] = new_position if @blueprint[new_position.first][new_position.last] == '.'
     return nil
   end
 
+  private
+  def axis(direction)
+    ['E', 'W'].include?(direction) ? 1 : 0
+  end
+
+  def movement(direction)
+    ['N', 'W'].include?(direction) ? -1 : 1
+  end
+
+  def proposed_position(player, direction)
+    new_position = @positions[player].dup
+    new_position[axis(direction)] += movement(direction)
+    new_position
+  end
+
+  def tile_at(x,y)
+    @blueprint[x][y]
+  end
 end
