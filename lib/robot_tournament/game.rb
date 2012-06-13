@@ -6,10 +6,11 @@ class Game
     Dir[RobotTournament.base_dir + '/games/*'].map { |path| File.basename(path) }
   end
   
-  def initialize(name)
+  def initialize(name, gameopts)
     @path = games_path + "/#{name}"
     @game_cmd = "#{@path}/bin/#{name}"
-    
+    @game_opts = gameopts
+
     unless File.exists?(@game_cmd)
       raise(ArgumentError, "Game '#{name}' not found in #{games_path}")
     end
@@ -25,7 +26,9 @@ class Game
     stderr_file = Tempfile.new('game')
     stderr_file.close
 
-    stdout = IO.popen("#{cmd} 2> #{stderr_file.path}", 'r') { |io| io.read }
+    torun = "#{cmd} #{@game_opts} 2> #{stderr_file.path}"
+    p torun
+    stdout = IO.popen(torun, 'r') { |io| io.read }
     stderr = IO.read(stderr_file.path)
     
     raise(BrokenGameEngineError, stderr) if $?.exitstatus != 0
