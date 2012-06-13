@@ -1,14 +1,24 @@
 class Board
   class AlreadyOccupiedError < StandardError; end
 
+  def default_map
+     blueprint = "***********\n" +
+                 "*......__.F\n" +
+                 "*...***...*\n" +
+                 "*...***...*\n" +
+                 "***********"
+
+    Map.new(blueprint, [1,1], [1,3])
+  end
+
   def initialize(observer, players, map)
     @observer = observer
-    @grid = Array.new(9) { '-' }
     @players = players
+    @map = map || default_map
   end
 
   def state
-    @grid.join
+    @map.state
   end
 
   def loser!(move, symbol, reason)
@@ -19,25 +29,18 @@ class Board
   end
 
   def move!(move, symbol)
-    if illegal?(move)
-      loser!(move, symbol, "attempted to play an illegal move")
+    begin
+      @map.move(symbol, move)
+      @observer.move(move, symbol)
+      report_any_result
+    rescue Map::PlayerCollision
+      loser!(move, symbol, "attempted to step on another player")
       return
     end
-
-    move = move.to_i
-
-    if already_occupied?(move)
-      loser!(move, symbol, "attempted to play on an already-taken space")
-      return
-    end
-
-    @observer.move(move, symbol)
-    @grid[move] = symbol
-    report_any_result
   end
 
   def done?
-    winner || full?
+    !winner_symbol.nil?
   end
 
   private
@@ -74,19 +77,7 @@ class Board
   end
 
   def winner_symbol
-    return opposide_of(@loser) if @loser
-    possible_lines.each do |line|
-      content = line.map { |index| @grid[index] }
-      next if content.any? { |cell| cell == '-' }
-      if content.uniq.length == 1
-        return content.uniq.first
-      end
-    end
-    nil
-  end
-
-  def full?
-    !@grid.any? { |cell| cell == '-' }
+    @map.winner
   end
 
   def possible_lines

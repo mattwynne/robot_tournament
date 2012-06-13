@@ -21,7 +21,7 @@ class Player
     stderr_file = Tempfile.new('game')
     stderr_file.close
 
-    cmd = "#{@path}/move #{board.state}"
+    cmd = "#{@path}/move \"#{board.state}\""
 
     stdout = Dir.chdir(@path) do
       Timeout.timeout(Player.max_move_secs) do

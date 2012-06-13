@@ -7,7 +7,7 @@ describe Map do
     "*...*\n" +
     "**F**"
   }
-  let(:map) { Map.new(blueprint, [2,1], [1,3]) }
+  let(:map) { Map.new(blueprint, [1,2], [3,1]) }
 
   it 'places players in their starting positions' do
     map.state.should == "*****\n" +
@@ -66,5 +66,15 @@ describe Map do
     map.move('2', 'W')
 
     expect { map.move('1', 'E') }.to raise_error(Map::PlayerCollision)
+  end
+
+  it 'reports no winner if no one has one' do
+    map.winner.should be_nil
+  end
+
+  it 'will report a winner' do
+    map.move('1', 'E')
+    map.move('1', 'S')
+    map.winner.should == '1'
   end
 end

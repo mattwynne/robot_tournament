@@ -2,7 +2,7 @@ require 'player'
 
 class Players
   def initialize(paths, reporter)
-    @players = paths.zip(['x', '0']).map do |path, symbol| 
+    @players = paths.zip(['1', '2']).map do |path, symbol| 
       Player.new(path, symbol)
     end
     

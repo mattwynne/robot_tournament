@@ -8,9 +8,10 @@ class Map
   end
 
   def state
-    state = @blueprint.dup
-    state[@positions['1'].first][@positions['1'].last] = '1'
-    state[@positions['2'].first][@positions['2'].last] = '2'
+    state = Marshal.load(Marshal.dump(@blueprint))
+    @positions.each do |symbol, position|
+      state[position.last][position.first] = symbol
+    end
     state.map(&:join).join("\n")
   end
 
@@ -18,9 +19,17 @@ class Map
     new_position = proposed_position(player, direction)
 
     raise PlayerCollision if @positions.values.include?(new_position)
-    @positions[player] = new_position if tile_at(*new_position) == '.'
+    @positions[player] = new_position unless tile_at(*new_position) == '*'
 
     return nil
+  end
+
+  def winner
+    winner = @positions.detect do |symbol, position|
+      tile_at(*position) == 'F'
+    end
+
+    winner && winner.first
   end
 
   private
@@ -39,7 +48,7 @@ class Map
   end
 
   def tile_at(x,y)
-    @blueprint[x][y]
+    @blueprint[y][x]
   end
 
   PlayerCollision = Class.new(StandardError)
