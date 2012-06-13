@@ -124,7 +124,19 @@ Feature: Play game
       """
 
   Scenario: Draw - max number of moves reached
-    Then pending
+    Given the maximum number of moves allowed is 10
+    And a player "always-north" who moves like this:
+      """
+      #!/usr/bin/env ruby
+      board_state = ARGV[0]
+      puts "N"
+      """
+    When a game is played between "always-north" and "always-south"
+    Then I should see:
+      """
+      The game has taken more than 10 moves each and is therefore a draw.
+      Result: draw
+      """
 
   Scenario: Player 1 loses by walking in to player 2
     When a game is played between "always-south" and "always-south"

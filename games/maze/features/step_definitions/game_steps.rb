@@ -22,3 +22,7 @@ end
 Given /^map "([^"]*)" is selected$/ do |map_name|
   @opts = "#{@opts} --map #{map_name}"
 end
+
+Given /^the maximum number of moves allowed is (\d+)$/ do |max|
+  @opts = "#{@opts} --maxmoves #{max}"
+end

@@ -9,14 +9,18 @@ class Game
     Player.max_move_secs = opts[:timeout] if opts[:timeout]
 
     @map = Map.load(select_map(opts[:map]))
+    @maxmoves = opts[:maxmoves]
   end
 
   def play(reporter)
-    board = Board.new(reporter, @players, @map)
+    board = Board.new(reporter, @players, @map, @maxmoves)
     until board.done?
       reporter.state(board.state(@current_player.symbol))
       move = @current_player.move(board, reporter)
       switch_players!
+    end
+    if (board.max_moves_reached?)
+      reporter.draw(board.state(@current_player.symbol))
     end
   end
 

@@ -6,6 +6,7 @@ require 'trollop'
 opts = Trollop::options do
   opt :timeout, "Number of seconds to wait for a player", :type => :float
   opt :map, "Specify the map to user", :type => :string
+  opt :maxmoves, "Specify the maximum number of moves before the game is a draw", :type => :integer
 end
 
 unless ARGV.length == 2
