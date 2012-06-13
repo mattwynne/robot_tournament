@@ -188,8 +188,28 @@ Feature: Play game
     And a player "slow" who moves like this:
       """
       #!/usr/bin/env ruby
-      sleep 1
+      sleep 2
 
       """
     When a game is played between "slow" and "always-east"
-    Then pending
+    Then I should see exactly:
+      """
+      player 1: 'slow'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: 
+      FOUL! player 1 has taken longer than 1.0 second(s) to move and loses by default
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      Result: always-east wins
+
+      """

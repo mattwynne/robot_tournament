@@ -16,9 +16,9 @@ When /^a game is played between "([^\"]*)" and "([^\"]*)"$/ do |player_1, player
 end
 
 Given /^the maximum seconds allowed for a move is "(.*)"$/ do |timeout|
-  @opts = "--timeout #{timeout}"
+  @opts = "#{@opts} --timeout #{timeout}"
 end
 
 Given /^map "([^"]*)" is selected$/ do |map_name|
-  @opts = "--map #{map_name}"
+  @opts = "#{@opts} --map #{map_name}"
 end
