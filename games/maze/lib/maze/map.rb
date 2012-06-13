@@ -34,7 +34,7 @@ class Map
 
   private
   def axis(direction)
-    ['E', 'W'].include?(direction) ? 1 : 0
+    ['S', 'N'].include?(direction) ? 1 : 0
   end
 
   def movement(direction)

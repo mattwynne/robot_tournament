@@ -73,8 +73,9 @@ describe Map do
   end
 
   it 'will report a winner' do
-    map.move('1', 'E')
-    map.move('1', 'S')
-    map.winner.should == '1'
+    map.move('2', 'W')
+    map.move('2', 'S')
+    map.move('2', 'S')
+    map.winner.should == '2'
   end
 end
