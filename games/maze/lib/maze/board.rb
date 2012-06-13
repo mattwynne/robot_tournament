@@ -1,7 +1,7 @@
 class Board
   class AlreadyOccupiedError < StandardError; end
 
-  MAX_MOVES = 400
+  MAX_MOVES_EACH = 200
 
   def default_map
      blueprint = "***********\n" +
@@ -17,13 +17,13 @@ class Board
     @observer = observer
     @players = players
     @moves = 0
-    @max_moves = max_moves*2 || MAX_MOVES
+    @max_moves_each = max_moves || MAX_MOVES_EACH
     @map = map || default_map
   end
 
   def state(symbol)
     state = ["You are player #{symbol}\n", @map.state]
-    state << "\nThe game has taken more than #{@max_moves/2} moves each and is therefore a draw.\n" if max_moves_reached?
+    state << "\nThe game has taken more than #{@max_moves_each} moves each and is therefore a draw.\n" if max_moves_reached?
     state.join
   end
 
@@ -54,7 +54,7 @@ class Board
   end
 
   def max_moves_reached?
-    @moves >= @max_moves
+    @moves >= @max_moves_each * 2
   end
 
   private
