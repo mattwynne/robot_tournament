@@ -60,4 +60,11 @@ describe Map do
                         "*1..*\n" +
                         "**F**"
   end
+
+  it 'does not allow player to walk into another player' do
+    map.move('1', 'N')
+    map.move('2', 'W')
+
+    expect { map.move('1', 'E') }.to raise_error(Map::PlayerCollision)
+  end
 end

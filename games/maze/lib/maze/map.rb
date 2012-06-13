@@ -16,6 +16,8 @@ class Map
 
   def move(player, direction)
     new_position = proposed_position(player, direction)
+
+    raise PlayerCollision if @positions.values.include?(new_position)
     @positions[player] = new_position if tile_at(*new_position) == '.'
 
     return nil
@@ -39,4 +41,6 @@ class Map
   def tile_at(x,y)
     @blueprint[x][y]
   end
+
+  PlayerCollision = Class.new(StandardError)
 end
