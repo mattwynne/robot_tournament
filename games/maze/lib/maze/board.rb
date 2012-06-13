@@ -17,8 +17,8 @@ class Board
     @map = map || default_map
   end
 
-  def state
-    @map.state
+  def state(symbol)
+    "You are player #{symbol}\n" + @map.state
   end
 
   def loser!(move, symbol, reason)
@@ -32,7 +32,7 @@ class Board
     begin
       @map.move(symbol, move)
       @observer.move(move, symbol)
-      report_any_result
+      report_any_result(symbol)
     rescue Map::PlayerCollision
       loser!(move, symbol, "attempted to step on another player")
       return
@@ -45,29 +45,13 @@ class Board
 
   private
 
-  def illegal?(move)
-    return true unless integer?(move)
-    return true if move.to_i > @grid.length
-  end
-
-  def integer?(move)
-    Integer(move)
-    return true
-  rescue ArgumentError
-    return false
-  end
-
-  def report_any_result
+  def report_any_result(symbol)
     return unless done?
     if winner
-      @observer.winner(winner, state)
+      @observer.winner(winner, state(symbol))
     else
-      @observer.draw(state)
+      @observer.draw(state(symbol))
     end
-  end
-
-  def already_occupied?(move)
-    @grid[move] != '-'
   end
 
   def winner
@@ -78,23 +62,5 @@ class Board
 
   def winner_symbol
     @map.winner
-  end
-
-  def possible_lines
-    [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
-    ]
-  end
-
-  def opposide_of(symbol)
-    return 'x' if symbol == '0'
-    '0'
   end
 end

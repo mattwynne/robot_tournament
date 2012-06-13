@@ -14,7 +14,7 @@ class Game
   def play(reporter)
     board = Board.new(reporter, @players, @map)
     until board.done?
-      reporter.state(board.state)
+      reporter.state(board.state(@current_player.symbol))
       move = @current_player.move(board, reporter)
       switch_players!
     end

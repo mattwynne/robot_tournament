@@ -16,6 +16,7 @@ class Map
   end
 
   def move(player, direction)
+    direction = direction.strip.upcase
     new_position = proposed_position(player, direction)
 
     raise PlayerCollision if @positions.values.include?(new_position)
