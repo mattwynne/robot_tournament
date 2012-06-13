@@ -117,8 +117,10 @@ Feature: Play game
       """
 
   Scenario: Draw - max number of moves reached
+    Then pending
 
   Scenario: Player 1 loses by walking in to player 2
+    Then pending
 
   Scenario: Player makes an illegal move
     Given a player "mistaken" who moves like this:
@@ -128,7 +130,27 @@ Feature: Play game
 
       """
     When a game is played between "mistaken" and "always-east"
-    Then pending
+    Then I should see exactly:
+      """
+      player 1: 'mistaken'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: 99 flake
+      FOUL! player 1 has attempted to make an illegal move and loses by default
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      Result: always-east wins
+
+      """
 
   Scenario: Player dies and throws an exception to STDERR
     Given a player "buggy" who moves like this:

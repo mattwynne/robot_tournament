@@ -82,6 +82,10 @@ describe Map do
                           "**F**"
     end
 
+    it 'does not allow a player to make an illegal move' do
+      expect { map.move('1', 'foo') }.to raise_error(Map::IllegalMove)
+    end
+
     it 'does not allow player to walk into another player' do
       map.move('1', 'N')
       map.move('2', 'W')

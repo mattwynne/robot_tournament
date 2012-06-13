@@ -19,6 +19,7 @@ class Map
 
   def move(player, direction)
     direction = direction.strip.upcase
+    raise IllegalMove unless legal_move?(direction)
     new_position = proposed_position(player, direction)
 
     raise PlayerCollision if @positions.values.include?(new_position)
@@ -40,6 +41,10 @@ class Map
     ['S', 'N'].include?(direction) ? 1 : 0
   end
 
+  def legal_move?(direction)
+    %{N S E W}.include?(direction)
+  end
+
   def movement(direction)
     ['N', 'W'].include?(direction) ? -1 : 1
   end
@@ -55,4 +60,5 @@ class Map
   end
 
   PlayerCollision = Class.new(StandardError)
+  IllegalMove = Class.new(StandardError)
 end

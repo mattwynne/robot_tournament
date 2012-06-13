@@ -36,6 +36,9 @@ class Board
     rescue Map::PlayerCollision
       loser!(move, symbol, "attempted to step on another player")
       return
+    rescue Map::IllegalMove
+      loser!(move, symbol, "attempted to make an illegal move")
+      return
     end
   end
 
@@ -59,6 +62,7 @@ class Board
   end
 
   def winner_symbol
+    return @players.other(@players[@loser]).symbol if @loser
     @map.winner
   end
 end
