@@ -1,4 +1,3 @@
-@announce
 Feature: Play game
 
   Background:

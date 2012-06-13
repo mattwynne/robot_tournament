@@ -27,7 +27,6 @@ class Game
     stderr_file.close
 
     torun = "#{cmd} #{@game_opts} 2> #{stderr_file.path}"
-    p torun
     stdout = IO.popen(torun, 'r') { |io| io.read }
     stderr = IO.read(stderr_file.path)
     
