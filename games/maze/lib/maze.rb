@@ -6,5 +6,6 @@
 $: << File.dirname(__FILE__) + '/maze'
 require 'players'
 require 'map'
+require 'map_loader'
 require 'game'
 require 'stdout_reporter'

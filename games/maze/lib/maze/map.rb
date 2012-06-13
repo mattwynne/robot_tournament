@@ -1,5 +1,7 @@
 class Map
   def self.load(path)
+    loader = MapLoader.new(path)
+    new(loader.blueprint, *loader.players_start)
   end
 
   def initialize(blueprint, player1_start, player2_start)
