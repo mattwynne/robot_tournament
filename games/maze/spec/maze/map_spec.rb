@@ -141,6 +141,30 @@ describe Map do
                             "*..........2*\n" +
                             "**F**********"
       end
+
+      it 'moves you up to a wall' do
+        map.move('2', 'N')
+        map.move('2', 'N')
+
+        map.state.should == "*************\n" +
+                            "*1.........2*\n" +
+                            "*._........_*\n" +
+                            "*._........_*\n" +
+                            "*.....____..*\n" +
+                            "*...........*\n" +
+                            "**F**********"
+      end
+
+      it 'will slide you on to another player, beware!' do
+        map.move('2', 'N')
+        map.move('2', 'W')
+        map.move('1', 'E')
+        map.move('1', 'S')
+        map.move('1', 'E')
+        map.move('1', 'E')
+        map.move('1', 'E')
+        expect { map.move('1', 'E') }.to raise_error(Map::PlayerCollision)
+      end
     end
   end
 end

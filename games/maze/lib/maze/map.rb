@@ -23,7 +23,12 @@ class Map
     new_position = proposed_position(player, direction)
 
     raise PlayerCollision if @positions.values.include?(new_position)
-    @positions[player] = new_position unless tile_at(*new_position) == '*'
+
+    if tile_at(*new_position) == '*'
+      @positions[player] = back_off_the_wall(new_position, direction)
+    else
+      @positions[player] = new_position
+    end
 
     return nil
   end
@@ -58,6 +63,11 @@ class Map
     end
 
     new_position
+  end
+
+  def back_off_the_wall(position, direction)
+    position[axis(direction)] -= movement(direction)
+    position
   end
 
   def tile_at(x,y)
