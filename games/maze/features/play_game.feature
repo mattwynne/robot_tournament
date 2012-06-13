@@ -113,7 +113,14 @@ Feature: Play game
       *2..***...*
       ***********
       1 move: E
+      You are player 1
+      ***********
+      *......__.1
+      *...***...*
+      *2..***...*
+      ***********
       Result: always-east wins
+
       """
 
   Scenario: Draw - max number of moves reached

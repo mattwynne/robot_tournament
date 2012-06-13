@@ -103,5 +103,44 @@ describe Map do
       map.move('2', 'S')
       map.winner.should == '2'
     end
+
+    context 'a map with ice' do
+      let(:blueprint) {
+        "*************\n" +
+        "*.........._*\n" +
+        "*._........_*\n" +
+        "*._........_*\n" +
+        "*.....____..*\n" +
+        "*...........*\n" +
+        "**F**********"
+      }
+      let(:map) { Map.new(blueprint, [1,1], [11,5]) }
+
+      it 'moves you another step in the same direction' do
+        map.move('1', 'S')
+        map.move('1', 'E')
+        map.state.should == "*************\n" +
+                            "*.........._*\n" +
+                            "*._1......._*\n" +
+                            "*._........_*\n" +
+                            "*.....____..*\n" +
+                            "*..........2*\n" +
+                            "**F**********"
+
+      end
+
+      it 'moves you along a whole line of ice' do
+        map.move('1', 'E')
+        map.move('1', 'S')
+
+        map.state.should == "*************\n" +
+                            "*.........._*\n" +
+                            "*._........_*\n" +
+                            "*._........_*\n" +
+                            "*.1...____..*\n" +
+                            "*..........2*\n" +
+                            "**F**********"
+      end
+    end
   end
 end

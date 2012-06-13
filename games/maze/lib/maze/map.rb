@@ -52,6 +52,11 @@ class Map
   def proposed_position(player, direction)
     new_position = @positions[player].dup
     new_position[axis(direction)] += movement(direction)
+
+    while tile_at(*new_position) == '_'
+      new_position[axis(direction)] += movement(direction)
+    end
+
     new_position
   end
 
