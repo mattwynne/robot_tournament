@@ -25,7 +25,7 @@ class Board
     @loser = symbol
     @observer.move(move, symbol)
     @observer.foul(symbol, reason)
-    report_any_result
+    report_any_result(symbol)
   end
 
   def move!(move, symbol)
@@ -40,7 +40,7 @@ class Board
   end
 
   def done?
-    !winner_symbol.nil?
+    !winner_symbol.nil? || @loser
   end
 
   private
@@ -49,8 +49,6 @@ class Board
     return unless done?
     if winner
       @observer.winner(winner, state(symbol))
-    else
-      @observer.draw(state(symbol))
     end
   end
 
