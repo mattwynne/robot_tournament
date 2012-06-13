@@ -51,4 +51,13 @@ describe Map do
                         "*1..*\n" +
                         "**F**"
   end
+
+  it 'does not move a player who walks into a wall' do
+    map.move('2', 'N')
+
+    map.state.should == "*****\n" +
+                        "*..2*\n" +
+                        "*1..*\n" +
+                        "**F**"
+  end
 end

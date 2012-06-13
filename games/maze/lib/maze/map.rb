@@ -18,7 +18,10 @@ class Map
     axis = ['E', 'W'].include?(direction) ? 1 : 0
     movement = ['N', 'W'].include?(direction) ? -1 : 1
 
-    @positions[player][axis] += movement
+    new_position = @positions[player].dup
+    new_position[axis] += movement
+
+    @positions[player] = new_position if @blueprint[new_position.first][new_position.last] == '.'
     return nil
   end
 
