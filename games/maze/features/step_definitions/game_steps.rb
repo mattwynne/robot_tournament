@@ -18,3 +18,7 @@ end
 Given /^the maximum seconds allowed for a move is "(.*)"$/ do |timeout|
   @opts = "--timeout #{timeout}"
 end
+
+Given /^map "([^"]*)" is selected$/ do |map_name|
+  @opts = "--map #{map_name}"
+end

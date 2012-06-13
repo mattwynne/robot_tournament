@@ -13,14 +13,8 @@ Feature: Play game
       board_state = ARGV[0]
       puts "S"
       """
-    And using a map "basic":
-      """
-      ***********
-      *1.....__.F
-      *...***...*
-      *2..***...*
-      ***********
-      """
+    And map "basic" is selected
+
   Scenario: Player 1 reaches finish first
     When a game is played between "always-east" and "always-south"
     Then I should see exactly:
