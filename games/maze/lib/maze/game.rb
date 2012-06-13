@@ -32,7 +32,7 @@ class Game
 
   def select_map(preselected = nil)
     map = available_maps.detect { |m| File.basename(m) == preselected }
-    map && available_maps[rand(available_maps.size)]
+    map || available_maps[rand(available_maps.size)]
   end
 
   def available_maps

@@ -1,3 +1,4 @@
+@announce
 Feature: Play game
 
   Background:
@@ -13,7 +14,7 @@ Feature: Play game
       board_state = ARGV[0]
       puts "S"
       """
-    And map "basic" is selected
+    And map "test" is selected
 
   Scenario: Player 1 reaches finish first
     When a game is played between "always-east" and "always-south"
