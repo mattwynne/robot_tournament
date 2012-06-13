@@ -13,7 +13,15 @@ Feature: Play game
       board_state = ARGV[0]
       puts "S"
       """
-  Scenario: Player 1 wins
+    And using a map "basic":
+      """
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      """
+  Scenario: Player 1 reaches finish first
     When a game is played between "always-east" and "always-south"
     Then I should see exactly:
       """
@@ -21,78 +29,102 @@ Feature: Play game
       player 2: 'always-south'
       You are player 1
       ***********
-      *......M..*
-      3...***...F
-      *.........*
+      *1.....__.F
+      *...***...*
+      *2..***...*
       ***********
       1 move: E
       You are player 2
       ***********
-      *......M..*
-      21..***...F
-      *.........*
+      *.1....__.F
+      *...***...*
+      *2..***...*
       ***********
       2 move: S
+      You are player 1
+      ***********
+      *.1....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *..1...__.F
+      *...***...*
+      *2..***...*
+      ***********
+      2 move: S
+      You are player 1
+      ***********
+      *..1...__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *...1..__.F
+      *...***...*
+      *2..***...*
+      ***********
+      2 move: S
+      You are player 1
+      ***********
+      *...1..__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *....1.__.F
+      *...***...*
+      *2..***...*
+      ***********
+      2 move: S
+      You are player 1
+      ***********
+      *....1.__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *.....1__.F
+      *...***...*
+      *2..***...*
+      ***********
+      2 move: S
+      You are player 1
+      ***********
+      *.....1__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
+      You are player 2
+      ***********
+      *......__1F
+      *...***...*
+      *2..***...*
+      ***********
+      2 move: S
+      You are player 1
+      ***********
+      *......__1F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: E
       Result: always-east wins
       """
 
-  Scenario: Draw
-    When a game is played between "always-east" and "always-east"
-    Then I should see exactly:
-      """
-      player 1: 'always-east'
-      player 2: 'always-east'
-      You are player 1
-      ***********
-      *......M..*
-      3...***...F
-      *.........*
-      ***********
-      1 move: E
-      You are player 2
-      ***********
-      *......M..*
-      21..***...F
-      *.........*
-      ***********
-      2 move: E
-      You are player 1
-      ***********
-      *......M..*
-      .3..***...F
-      *.........*
-      ***********
-      1 move: E
-      You are player 2
-      ***********
-      *......M..*
-      .21.***...F
-      *.........*
-      ***********
-      2 move: E
-      You are player 1
-      ***********
-      *......M..*
-      ..3.***...F
-      *.........*
-      ***********
-      1 move: E
-      You are player 2
-      ***********
-      *......M..*
-      ..21***...F
-      *.........*
-      ***********
-      2 move: E
-      You are player 1
-      ***********
-      *......M..*
-      ...3***...F
-      *.........*
-      ***********
-      1 move: E
-      Result: draw
-      """
+  Scenario: Draw - max number of moves reached
+
+  Scenario: Player 1 loses by walking in to player 2
+
   Scenario: Player makes an illegal move
     Given a player "mistaken" who moves like this:
       """
@@ -101,20 +133,8 @@ Feature: Play game
 
       """
     When a game is played between "mistaken" and "always-east"
-    Then I should see exactly:
-      """
-      player 0: 'mistaken'
-      player x: 'always-east'
-      You are player 1
-      ***********
-      *......M..*
-      3...***...F
-      *.........*
-      ***********
-      1 move: 99 flake
-      FOUL! player 1 has attempted to play an illegal move and loses by default
-      Result: blocker wins
-      """
+    Then pending
+
   Scenario: Player dies and throws an exception to STDERR
     Given a player "buggy" who moves like this:
       """
@@ -124,22 +144,8 @@ Feature: Play game
 
       """
     When a game is played between "buggy" and "always-east"
-    Then I should see exactly:
-      """
-      player 1: 'buggy'
-      player 2: 'always-east'
-      You are player 1
-      ***********
-      *......M..*
-      3...***...F
-      *.........*
-      ***********
-      1 move: this is my exception
-      FOUL! player 1 has returned a non-zero exit status and loses by default
-      ---------
-      Result: always-east wins
+    Then pending
 
-      """
   Scenario: Player takes too long to make a move
     Given the maximum seconds allowed for a move is "1.0"
     And a player "slow" who moves like this:
@@ -149,20 +155,4 @@ Feature: Play game
 
       """
     When a game is played between "slow" and "always-east"
-    Then I should see exactly:
-      """
-      player 1: 'slow'
-      player 2: 'always-east'
-      You are player 1
-      ***********
-      *......M..*
-      3...***...F
-      *.........*
-      ***********
-      1 move:
-      FOUL! player x has taken longer than 1.0 second(s) to move and loses by default
-      Result: always-east wins
-      """
-
-  Scenario: Successful pathfinding
-    Given this hasn't been written yet: we need a bot
+    Then pending
