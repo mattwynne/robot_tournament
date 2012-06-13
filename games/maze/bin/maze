@@ -5,6 +5,7 @@ require 'trollop'
 
 opts = Trollop::options do
   opt :timeout, "Number of seconds to wait for a player", :type => :float
+  opt :map, "Specify the map to user", :type => :string
 end
 
 unless ARGV.length == 2
