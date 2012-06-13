@@ -127,8 +127,42 @@ Feature: Play game
     Then pending
 
   Scenario: Player 1 loses by walking in to player 2
-    Then pending
+    When a game is played between "always-south" and "always-south"
+    Then I should see exactly:
+    """
+    player 1: 'always-south'
+    player 2: 'always-south'
+    You are player 1
+    ***********
+    *1.....__.F
+    *...***...*
+    *2..***...*
+    ***********
+    1 move: S
+    You are player 2
+    ***********
+    *......__.F
+    *1..***...*
+    *2..***...*
+    ***********
+    2 move: S
+    You are player 1
+    ***********
+    *......__.F
+    *1..***...*
+    *2..***...*
+    ***********
+    1 move: S
+    FOUL! player 1 has attempted to step on another player and loses by default
+    You are player 1
+    ***********
+    *......__.F
+    *1..***...*
+    *2..***...*
+    ***********
+    Result: always-south wins
 
+    """
   Scenario: Player makes an illegal move
     Given a player "mistaken" who moves like this:
       """
