@@ -161,7 +161,27 @@ Feature: Play game
 
       """
     When a game is played between "buggy" and "always-east"
-    Then pending
+    Then I should see exactly:
+      """
+      player 1: 'buggy'
+      player 2: 'always-east'
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      1 move: this is my exception
+      FOUL! player 1 has returned a non-zero exit status and loses by default
+      You are player 1
+      ***********
+      *1.....__.F
+      *...***...*
+      *2..***...*
+      ***********
+      Result: always-east wins
+
+      """
 
   Scenario: Player takes too long to make a move
     Given the maximum seconds allowed for a move is "1.0"
