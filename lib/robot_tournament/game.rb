@@ -6,7 +6,7 @@ class Game
     Dir[RobotTournament.base_dir + '/games/*'].map { |path| File.basename(path) }
   end
   
-  def initialize(name, gameopts)
+  def initialize(name, gameopts={})
     @path = games_path + "/#{name}"
     @game_cmd = "#{@path}/bin/#{name}"
     @game_opts = gameopts
