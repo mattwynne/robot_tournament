@@ -1,1 +1,1 @@
-rvm use @robot_tournament
+rvm use 1.8.7@robot_tournament
