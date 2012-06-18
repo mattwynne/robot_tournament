@@ -26,7 +26,7 @@ See the features for examples, or the folder 'examples'
 
 Use the following command to create and start a tournament:
 
-    ./bin/create_tournament --name "battle royale" --rounds 5 --duration 10 --gameopts "--map foo" --game rock_paper_scissors
+    ./bin/create_tournament --name "battle royale" --rounds 5 --duration 10 --game rock_paper_scissors
 
 You will also need to run
 

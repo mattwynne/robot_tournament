@@ -25,7 +25,7 @@ class Map
     raise PlayerCollision if @positions.values.include?(new_position)
 
     if tile_at(*new_position) == '*'
-      @positions[player] = back_off_the_wall(new_position, direction)
+      raise WallCollision
     else
       @positions[player] = new_position
     end
@@ -75,5 +75,6 @@ class Map
   end
 
   PlayerCollision = Class.new(StandardError)
+  WallCollision = Class.new(StandardError)
   IllegalMove = Class.new(StandardError)
 end

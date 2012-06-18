@@ -73,13 +73,8 @@ describe Map do
                           "**F**"
     end
 
-    it 'does not move a player who walks into a wall' do
-      map.move('1', 'S')
-
-      map.state.should == "*****\n" +
-                          "*..2*\n" +
-                          "*1..*\n" +
-                          "**F**"
+    it 'does not allow a player to walk into a wall' do
+      expect { map.move('1', 'S') }.to raise_error(Map::WallCollision)
     end
 
     it 'does not allow a player to make an illegal move' do
@@ -142,17 +137,9 @@ describe Map do
                             "**F**********"
       end
 
-      it 'moves you up to a wall' do
+      it 'moves you up to a wall (which is illegal)' do
         map.move('2', 'N')
-        map.move('2', 'N')
-
-        map.state.should == "*************\n" +
-                            "*1.........2*\n" +
-                            "*._........_*\n" +
-                            "*._........_*\n" +
-                            "*.....____..*\n" +
-                            "*...........*\n" +
-                            "**F**********"
+        expect { map.move('2', 'N') }.to raise_error(Map::WallCollision)
       end
 
       it 'will slide you on to another player, beware!' do

@@ -86,7 +86,6 @@ class Round
   def read_settings!
     settings = read_json(:settings)
     @game       = settings["game"]
-    @gameopts       = settings["gameopts"]
     @start_time = Time.parse(settings["start_time"])
   end
   
@@ -96,7 +95,7 @@ class Round
   
   def start!
     FileUtils.touch(@path + '/started')
-    RoundRunner.new(player_store, Game.new(@game, @gameopts), self).start!
+    RoundRunner.new(player_store, Game.new(@game), self).start!
   end
   
   def player_store
